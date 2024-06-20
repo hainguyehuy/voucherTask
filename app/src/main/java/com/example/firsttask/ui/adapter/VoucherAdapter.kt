@@ -1,13 +1,20 @@
 package com.example.firsttask.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firsttask.data.model.Item
 import com.example.firsttask.databinding.ItemLayoutBinding
 
-class VoucherAdapter(private val item : List<Item>) : RecyclerView.Adapter<VoucherAdapter.VoucherViewHolder>(){
+class VoucherAdapter() : RecyclerView.Adapter<VoucherAdapter.VoucherViewHolder>(){
+    private val item : MutableList<Item> = mutableListOf()
+    fun updateData(items: List<Item>) {
+        item.clear()
+        item.addAll(items)
+        notifyDataSetChanged()
+
+    }
+
     class VoucherViewHolder(private var binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : Item){
             binding.tvNameVoucher.text = item.name
