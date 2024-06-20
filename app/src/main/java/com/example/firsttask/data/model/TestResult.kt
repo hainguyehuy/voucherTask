@@ -1,6 +1,6 @@
 package com.example.firsttask.data.model
 
-data class Result(
+data class TestResult(
     val items: List<Item>,
     val pagination: Pagination
 )

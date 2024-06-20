@@ -6,11 +6,10 @@ import android.widget.Button
 import com.example.firsttask.R
 
 class MainActivity : AppCompatActivity() {
-    val btn : Button = findViewById(R.id.btn)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val btn : Button = findViewById(R.id.btn)
         btn.setOnClickListener {
                 val bottomSheetFragment = BottomSheetFragment()
                 bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)

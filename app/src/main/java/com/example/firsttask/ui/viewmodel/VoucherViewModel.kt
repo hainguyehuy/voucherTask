@@ -1,11 +1,11 @@
 package com.example.firsttask.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.firsttask.data.model.Item
-import com.example.firsttask.data.model.Result
 import com.example.firsttask.data.repository.RetrofitRepository
 import kotlinx.coroutines.launch
 
@@ -19,13 +19,11 @@ class VoucherViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = retrofitRepository.getVouchers()
-                if (response.isSuccessful){
-                    _vouchers.postValue(response.body())
-                }else{
-                    errorMessage.postValue("Errors : ${response.message()}")
-                }
+                    _vouchers.postValue(response)
+                    Log.d("data","${response.size}")
             }catch (e: Exception){
-                //error
+                Log.e("error","${errorMessage}")
+
             }
         }
     }
