@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
     <data>
@@ -8,141 +9,203 @@
 <!--            type="com.example.firsttask.ui.adapter.VoucherAdapter" />-->
     </data>
     <!-- TODO: Update blank fragment layout -->
-    <FrameLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="129dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="128dp"
+            android:layout_marginBottom="18dp"
+            android:text="Your Voucher"
+            android:textColor="#121212"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/right_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="331dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/right_icons"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.571"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="MissingConstraints" />
+
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="8dp"
-            >
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:layout_constraintVertical_bias="0.006">
 
             <TextView
+                android:id="@+id/tvSelected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="18dp"
-                android:text="Your Voucher"
+                android:layout_marginRight="120dp"
+                android:layout_weight="700"
+                android:text="Selected vouchers (0)"
                 android:textColor="#121212"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvSGD"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvSelected"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="120dp"
-                        android:layout_weight="700"
-                        android:text="Selected vouchers (0)"
-                        android:textColor="#121212"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvSGD"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:text="SGD 0.00"
-                        android:textColor="#121212"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvNewPayable"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="120dp"
-                        android:layout_weight="700"
-                        android:text="New payable amount"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvAmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:text="-"
-                        android:textSize="14sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnContinue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:backgroundTint="#8A2AA2"
-                android:text="Continue" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="4dp"
-                android:orientation="horizontal">
+                android:text="SGD 0.00"
+                android:textColor="#121212"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvDisplayVouchers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="120dp"
-                    android:layout_weight="700"
-                    android:text="Displaying 54 of 54 vouchers"
-                    android:textColor="#121212"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    />
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/btnContinue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+            tools:layout_editor_absoluteY="91dp">
 
-                <TextView
-                    android:id="@+id/tvSelectedAllVoucher"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_weight="700"
-                    android:lineHeight="16dp"
-                    android:text="Select all 54"
-                    android:textColor="#7A35B0"
-                    android:textSize="12sp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tvNewPayable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="120dp"
+                android:layout_weight="700"
+                android:text="New payable amount"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="-"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+
+            android:backgroundTint="#8A2AA2"
+            android:text="Continue"
+            android:textColor="#FCFCFC"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout3"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/csL2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnContinue"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/tvDisplayVouchers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="120dp"
+                android:layout_weight="700"
+                android:text="Displaying 54 of 54 vouchers"
+                android:textColor="#121212"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSelectedAllVoucher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="700"
+                android:lineHeight="16dp"
+                android:text="Select all 54"
+                android:textColor="#7A35B0"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/csL2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="225dp"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout4">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvVoucher"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_layout"
-                tools:itemCount="2"
                 android:scrollbars="horizontal"
+                tools:itemCount="2"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="421dp"
+                tools:listitem="@layout/item_layout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                />
-        </LinearLayout>
 
-    </FrameLayout>
-
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

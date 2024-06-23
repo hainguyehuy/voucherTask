@@ -1,7 +1,6 @@
 package com.example.firsttask.ui.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,34 +11,36 @@ import com.example.firsttask.ui.adapter.VoucherAdapter
 import com.example.firsttask.ui.viewmodel.VoucherViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+interface ButtonClickEvent{
+    fun clickItem(count : Int)
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BottomSheetFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
- class BottomSheetFragment : BottomSheetDialogFragment() {
-    private val viewModel : VoucherViewModel by viewModels()
-    private var _binding : FragmentBottomSheetBinding?= null
+}
+class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
+    private val viewModel: VoucherViewModel by viewModels()
+    private var _binding: FragmentBottomSheetBinding? = null
     private val voucherAdapter = VoucherAdapter()
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentBottomSheetBinding.inflate(inflater,container,false)
+        _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         _binding!!.rvVoucher.layoutManager = LinearLayoutManager(context)
-        viewModel.vouchers.observe(this){
-              voucherAdapter.updateData(it)
+        _binding!!.rvVoucher.adapter = voucherAdapter
+        viewModel.vouchers.observe(this) {
+            voucherAdapter.updateData(it)
+        }
+        viewModel.fetchVoucher()
+
+        //set interface = interface implement in this class
+        voucherAdapter.event = this
+        viewModel.amountSelected.observe(this){
+            _binding!!.tvSelected.text = it.toString()
         }
         return binding.root
-        viewModel.fetchVoucher()
 
     }
 
@@ -51,6 +52,10 @@ private const val ARG_PARAM2 = "param2"
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun clickItem(count: Int) {
+        viewModel.updateAmountSelected(count)
     }
 
 }
