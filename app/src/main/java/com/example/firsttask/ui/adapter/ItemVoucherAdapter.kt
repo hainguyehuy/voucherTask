@@ -1,32 +1,38 @@
 package com.example.firsttask.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.firsttask.data.model.Item
-import com.example.firsttask.data.model.Item_voucher
+import com.example.firsttask.R
+import com.example.firsttask.data.model.Item_Voucher
 import com.example.firsttask.databinding.ItemLayoutBinding
+import com.example.firsttask.ui.view.ButtonClickEvent
 
-class ItemVoucherAdapter(): RecyclerView.Adapter<ItemVoucherAdapter.ItemVoucherAdapterViewHolder>() {
-    private val item = ArrayList<Item_voucher>()
-    private val count = null
-    inner class ItemVoucherAdapterViewHolder(private var binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(item : Item_voucher){
-            binding.tvNameVoucher.text = item.amount
+class ItemVoucherAdapter() :
+    RecyclerView.Adapter<ItemVoucherAdapter.ItemVoucherAdapterViewHolder>() {
+    private val item = ArrayList<Item_Voucher>()
+    var event: ButtonClickEvent? = null
+    var count = 0
+    var sum = 0.0
+
+    inner class ItemVoucherAdapterViewHolder(private var binding: ItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Item_Voucher) {
             binding.imgVoucher.setOnClickListener {
-                for(i in 1..itemCount){
-                    if(item.checked){
-                        //
+                for (i in 1..itemCount) {
+                    if (item.checked) {
+                        count += 1
+                        sum += item.amountt
+                        event!!.clickItem(count)
+                        event!!.clickItemSGD(sum)
+                        binding.imgPlus.setImageResource(R.drawable.img_1)
                     }
-            }
-                //updateItemView ( check value nguoc lai cua + )
-                // use forEach ItemView ( tao 1 bien dem, va truyen vao clickItem khi dem xong
+                }
             }
         }
     }
-    fun updateItemData(items: List<Item_voucher>) {
+
+    fun updateItemData(items: List<Item_Voucher>) {
         item.clear()
         item.addAll(items)
         notifyDataSetChanged()

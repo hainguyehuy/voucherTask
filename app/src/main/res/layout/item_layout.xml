@@ -101,6 +101,25 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/imgDone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="291dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="29dp"
+            android:src="@drawable/img_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="MissingConstraints"
+            android:visibility="gone"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

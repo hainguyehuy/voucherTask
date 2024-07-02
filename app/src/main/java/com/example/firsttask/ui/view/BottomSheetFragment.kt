@@ -7,18 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firsttask.databinding.FragmentBottomSheetBinding
+import com.example.firsttask.ui.adapter.ItemVoucherAdapter
 import com.example.firsttask.ui.adapter.VoucherAdapter
 import com.example.firsttask.ui.viewmodel.VoucherViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 interface ButtonClickEvent{
     fun clickItem(count : Int)
-
+    fun clickItemSGD(sum : Double)
 }
 class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
     private val viewModel: VoucherViewModel by viewModels()
     private var _binding: FragmentBottomSheetBinding? = null
-    private val voucherAdapter = VoucherAdapter()
+    private val itemVoucherAdapter = ItemVoucherAdapter()
     private val binding get() = _binding!!
 
 
@@ -29,16 +30,18 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
 
         _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         _binding!!.rvVoucher.layoutManager = LinearLayoutManager(context)
-        _binding!!.rvVoucher.adapter = voucherAdapter
+        _binding!!.rvVoucher.adapter = itemVoucherAdapter
         viewModel.vouchers.observe(this) {
-            voucherAdapter.updateData(it)
+            itemVoucherAdapter.updateItemData(it)
         }
         viewModel.fetchVoucher()
 
-        //set interface = interface implement in this class
-        voucherAdapter.event = this
+        itemVoucherAdapter.event = this
         viewModel.amountSelected.observe(this){
             _binding!!.tvSelected.text = it.toString()
+        }
+        viewModel.sgdSelected.observe(this){
+            _binding!!.tvSGD.text = it.toString()
         }
         return binding.root
 
@@ -56,6 +59,11 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
 
     override fun clickItem(count: Int) {
         viewModel.updateAmountSelected(count)
+    }
+
+    override fun clickItemSGD(sum: Double) {
+        viewModel.updateSGDSelected(sum)
+
     }
 
 }

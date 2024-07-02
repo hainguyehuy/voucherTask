@@ -6,36 +6,52 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.firsttask.data.model.Item
+import com.example.firsttask.data.model.Item_Voucher
 import com.example.firsttask.data.repository.RetrofitRepository
-import com.example.firsttask.ui.adapter.VoucherAdapter
 import kotlinx.coroutines.launch
 
 class VoucherViewModel : ViewModel() {
     private val retrofitRepository = RetrofitRepository()
-    private val _vouchers = MutableLiveData<List<Item>>()
-    var vouchers : LiveData<List<Item>> = _vouchers
-    private val errorMessage = MutableLiveData<String>()
+    private val _vouchers = MutableLiveData<List<Item_Voucher>>()
+    var vouchers: LiveData<List<Item_Voucher>> = _vouchers
 
-    var amountSelected : MutableLiveData<Int> = MutableLiveData(0)
+    var amountSelected = MutableLiveData<Int>()
+    var sgdSelected = MutableLiveData<String>()
 
     @SuppressLint("SuspiciousIndentation")
-    fun fetchVoucher()  {
+    fun fetchVoucher() {
         viewModelScope.launch {
             try {
                 val response = retrofitRepository.getVouchers()
-                _vouchers.postValue(response)
+                var arrayList = ArrayList<Item_Voucher>()
+                response.forEach() { item ->
+                    arrayList.addAll(
+                        listOf(
+                            Item_Voucher(
+                                item.amount.toDouble(),
+                                item.provider,
+                                item.exp,
+                                true
+                            )
+                        )
+                    )
+                }
+                _vouchers.postValue(arrayList)
                 Log.d("data", "${response.size}")
             } catch (e: Exception) {
                 Log.e("error", "${e.message.toString()}")
             }
         }
+
     }
-    fun updateAmountSelected(count : Int){
+
+    fun updateAmountSelected(count: Int) {
         amountSelected.postValue(count)
     }
 
-
+    fun updateSGDSelected(sum: Double) {
+        sgdSelected.postValue(sum.toString())
+    }
 
 
 }

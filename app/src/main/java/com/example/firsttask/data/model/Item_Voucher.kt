@@ -1,0 +1,9 @@
+package com.example.firsttask.data.model
+
+
+data class Item_Voucher(
+    var amountt : Double,
+    var provider: String,
+    var exp : String,
+    var checked : Boolean
+)

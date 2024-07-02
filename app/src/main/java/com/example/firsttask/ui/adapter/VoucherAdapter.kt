@@ -2,7 +2,6 @@ package com.example.firsttask.ui.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.media3.common.util.Util
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firsttask.data.model.Item
 import com.example.firsttask.databinding.ItemLayoutBinding
@@ -11,6 +10,8 @@ import com.example.firsttask.ui.view.ButtonClickEvent
 class VoucherAdapter() : RecyclerView.Adapter<VoucherAdapter.VoucherViewHolder>(){
     //khai bao interface
     var event : ButtonClickEvent?= null
+    var count = 0
+    var sum = 0.0
     private val item : MutableList<Item> = mutableListOf()
     @SuppressLint("NotifyDataSetChanged")
     fun updateData(items: List<Item>) {
@@ -20,15 +21,18 @@ class VoucherAdapter() : RecyclerView.Adapter<VoucherAdapter.VoucherViewHolder>(
     }
 
     inner class VoucherViewHolder(private var binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
+        @SuppressLint("ResourceType")
         fun bind(item : Item){
-            binding.tvNameVoucher.text = item.name
-            binding.tvProvider.text = item.provider
-            binding.tvDate.text = item.exp
-            binding.imgPlus.setOnClickListener {
-                event!!.clickItem(5)
-                //updateItemView ( check value nguoc lai cua + )
-                // use forEach ItemView ( tao 1 bien dem, va truyen vao clickItem khi dem xong
-            }
+//            binding.tvNameVoucher.text = item.amount
+//            binding.imgPlus.setOnClickListener {
+//                count ++
+//                sum+=item.amount.toDouble()
+//                for(i in 1..itemCount){
+//                    event!!.clickItem(count)
+//                    event!!.clickItemSGD(sum)
+//                    binding.imgPlus.setImageResource(R.drawable.img_1)
+//                }
+//            }
         }
 
     }
