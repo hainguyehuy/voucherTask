@@ -16,7 +16,8 @@ class VoucherViewModel : ViewModel() {
     var vouchers: LiveData<List<Item_Voucher>> = _vouchers
 
     var amountSelected = MutableLiveData<Int>()
-    var sgdSelected = MutableLiveData<String>()
+    var sgdSelected = MutableLiveData<Double>()
+    var checked = MutableLiveData<Boolean>()
 
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {
@@ -31,7 +32,10 @@ class VoucherViewModel : ViewModel() {
                                 item.amount.toDouble(),
                                 item.provider,
                                 item.exp,
-                                true
+                                true,
+                                item.name,
+                                item.minSpend,
+                                item.id
                             )
                         )
                     )
@@ -50,7 +54,10 @@ class VoucherViewModel : ViewModel() {
     }
 
     fun updateSGDSelected(sum: Double) {
-        sgdSelected.postValue(sum.toString())
+        sgdSelected.postValue(sum)
+    }
+    fun updateSelectedItem(isChecked : Boolean){
+        checked.postValue(isChecked)
     }
 
 

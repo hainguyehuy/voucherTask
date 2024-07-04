@@ -11,5 +11,5 @@ data class Item(
 )
 // tao class chua data of itemView
  // tao bien checked
-// map sang itemview
+// map sang itemView
 // click + -> value of checked -> goi rv update ui

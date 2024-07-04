@@ -5,8 +5,8 @@
     >
     <data>
 <!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="com.example.firsttask.ui.adapter.VoucherAdapter" />-->
+<!--&lt;!&ndash;            name="viewModel"&ndash;&gt;-->
+<!--&lt;!&ndash;            type="com.example.firsttask.ui.adapter.ItemVoucherAdapter" />&ndash;&gt;-->
     </data>
     <!-- TODO: Update blank fragment layout -->
 
@@ -175,7 +175,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_weight="700"
                 android:lineHeight="16dp"
-                android:text="Select all 54"
+                android:text="Select all 54 vouchers"
                 android:textColor="#7A35B0"
                 android:textSize="12sp" />
         </LinearLayout>

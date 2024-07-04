@@ -6,6 +6,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("https://a1332445bf314d48a1396433b5df0a03.api.mockbin.io")
+    @GET(" https://2961bb48990f4396ba6eed853b1926d0.api.mockbin.io/")
     suspend fun getData() : Response<voucherX>
 }

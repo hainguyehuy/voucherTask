@@ -8,14 +8,15 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firsttask.databinding.FragmentBottomSheetBinding
 import com.example.firsttask.ui.adapter.ItemVoucherAdapter
-import com.example.firsttask.ui.adapter.VoucherAdapter
 import com.example.firsttask.ui.viewmodel.VoucherViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-interface ButtonClickEvent{
-    fun clickItem(count : Int)
-    fun clickItemSGD(sum : Double)
+interface ButtonClickEvent {
+    fun clickItem(count: Int)
+    fun clickItemSGD(sum: Double)
+    fun clickSelectAll(isChecked : Boolean)
 }
+
 class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
     private val viewModel: VoucherViewModel by viewModels()
     private var _binding: FragmentBottomSheetBinding? = null
@@ -31,21 +32,32 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         _binding!!.rvVoucher.layoutManager = LinearLayoutManager(context)
         _binding!!.rvVoucher.adapter = itemVoucherAdapter
+
+        //handle event click selectedAll
+        _binding!!.tvSelectedAllVoucher.setOnClickListener {
+            itemVoucherAdapter.clickSelectedAll(true)
+        }
+
         viewModel.vouchers.observe(this) {
             itemVoucherAdapter.updateItemData(it)
         }
         viewModel.fetchVoucher()
 
+
         itemVoucherAdapter.event = this
-        viewModel.amountSelected.observe(this){
+        viewModel.amountSelected.observe(this) {
             _binding!!.tvSelected.text = it.toString()
         }
-        viewModel.sgdSelected.observe(this){
+        viewModel.sgdSelected.observe(this) {
             _binding!!.tvSGD.text = it.toString()
+        }
+        viewModel.checked.observe(this){
+            _binding!!.tvSelectedAllVoucher.text = it.toString()
         }
         return binding.root
 
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,5 +77,10 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         viewModel.updateSGDSelected(sum)
 
     }
+
+    override fun clickSelectAll(isChecked: Boolean) {
+        viewModel.updateSelectedItem(isChecked)
+    }
+
 
 }

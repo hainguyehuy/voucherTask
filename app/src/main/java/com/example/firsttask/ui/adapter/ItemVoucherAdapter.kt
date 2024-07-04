@@ -11,31 +11,41 @@ import com.example.firsttask.ui.view.ButtonClickEvent
 class ItemVoucherAdapter() :
     RecyclerView.Adapter<ItemVoucherAdapter.ItemVoucherAdapterViewHolder>() {
     private val item = ArrayList<Item_Voucher>()
-    var event: ButtonClickEvent? = null
-    var count = 0
-    var sum = 0.0
-
-    inner class ItemVoucherAdapterViewHolder(private var binding: ItemLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Item_Voucher) {
-            binding.imgVoucher.setOnClickListener {
-                for (i in 1..itemCount) {
-                    if (item.checked) {
-                        count += 1
-                        sum += item.amountt
-                        event!!.clickItem(count)
-                        event!!.clickItemSGD(sum)
-                        binding.imgPlus.setImageResource(R.drawable.img_1)
-                    }
-                }
-            }
-        }
-    }
-
     fun updateItemData(items: List<Item_Voucher>) {
         item.clear()
         item.addAll(items)
         notifyDataSetChanged()
+    }
+
+    var event: ButtonClickEvent? = null
+    var count = 0
+    var sum = 0.0
+    val isCheck = true
+
+    inner class ItemVoucherAdapterViewHolder(private var binding: ItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Item_Voucher) {
+            binding.tvNameVoucher.text = item.name
+            binding.tvEXP.text = item.exp
+            binding.tvProvider.text = item.provider
+            binding.imgPlus.setOnClickListener {
+                count += 1
+                sum += item.amountt
+                if (item.checked) {
+                    event!!.clickItem(count)
+                    event!!.clickItemSGD(sum)
+                    binding.imgPlus.setImageResource(R.drawable.quantity)
+                    binding.imgPlus.isEnabled
+                }
+
+            }
+
+        }
+    }
+
+    override fun onBindViewHolder(holder: ItemVoucherAdapterViewHolder, position: Int) {
+        holder.bind(item[position])
+
     }
 
     override fun onCreateViewHolder(
@@ -50,7 +60,12 @@ class ItemVoucherAdapter() :
         return item.size
     }
 
-    override fun onBindViewHolder(holder: ItemVoucherAdapterViewHolder, position: Int) {
-        holder.bind(item[position])
+    fun clickSelectedAll(select: Boolean) {
+        item.forEach {
+            it.checked = select
+            notifyDataSetChanged()
+
+        }
     }
+
 }
