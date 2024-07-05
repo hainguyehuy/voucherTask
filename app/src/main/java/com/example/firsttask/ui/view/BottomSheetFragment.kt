@@ -1,11 +1,21 @@
 package com.example.firsttask.ui.view
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.firsttask.R
+import com.example.firsttask.data.model.Item_Voucher
 import com.example.firsttask.data.model.voucherX
 import com.example.firsttask.databinding.FragmentBottomSheetBinding
 import com.example.firsttask.ui.adapter.ItemVoucherAdapter
@@ -15,16 +25,18 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 interface ButtonClickEvent {
     fun clickItem(count: Int)
     fun clickItemSGD(sum: Double)
-    fun clickSelectAll(isChecked : Boolean)
+    fun clickSelectAll(isChecked: Boolean)
 }
 
 class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
     private val viewModel: VoucherViewModel by viewModels()
     private var _binding: FragmentBottomSheetBinding? = null
     private val itemVoucherAdapter = ItemVoucherAdapter()
+//    private val listVoucher = ArrayList<Item_Voucher>()
     private val binding get() = _binding!!
-    val select  = "Select all"
+    val select = "Select all"
     val display = "Displaying"
+    val unSelect = "UnSelect all "
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,11 +50,33 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         //handle event click selectedAll
         _binding!!.tvSelectedAllVoucher.setOnClickListener {
             itemVoucherAdapter.clickSelectedAll(true)
+            viewModel.vouchers.observe(this){
+                _binding!!.tvSelectedAllVoucher.text =
+                    StringBuilder().append(unSelect).append(" ").append(it.size.toString())
+                _binding!!.tvSelectedAllVoucher.setOnClickListener{
+                    itemVoucherAdapter.changeUnselect(true)
+                    viewModel.vouchers.observe(this) {
+                        _binding!!.tvSelectedAllVoucher.text =
+                            StringBuilder().append(select).append(" ").append(it.size.toString())
+                    }
+                }
+
+            }
+
+        }
+        _binding!!.rightIcon.setOnClickListener {
+            val message: String? = "Do you want to apply your selected vouchers"
+            showsCustomDialogBox(message)
         }
 
         viewModel.vouchers.observe(this) {
-            _binding!!.tvSelectedAllVoucher.text = StringBuilder().append(select).append(" ").append(it.size.toString())
-            _binding!!.tvDisplayVouchers.text = StringBuilder().append(display).append(" ").append(it.size.toString()).append(" of ${it.size} vouchers")
+            _binding!!.tvSelectedAllVoucher.text =
+                StringBuilder().append(select).append(" ").append(it.size.toString())
+            _binding!!.tvUnSelectedAllVoucher.text =
+                StringBuilder().append(unSelect).append(" ").append(it.size.toString())
+            _binding!!.tvDisplayVouchers.text =
+                StringBuilder().append(display).append(" ").append(it.size.toString())
+                    .append(" of ${it.size} vouchers")
 
             itemVoucherAdapter.updateItemData(it)
         }
@@ -51,16 +85,38 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
 
         itemVoucherAdapter.event = this
         viewModel.amountSelected.observe(this) {
-            _binding!!.tvSelected.text = it.toString()
+            _binding!!.tvSelected.text =
+                StringBuilder().append("Selected vouchers " + "(${it.toString()})")
         }
         viewModel.sgdSelected.observe(this) {
-            _binding!!.tvSGD.text = it.toString()
+            _binding!!.tvSGD.text = StringBuilder().append("SGD " + "${it.toString()}")
         }
-        viewModel.checked.observe(this){
+        viewModel.checked.observe(this) {
             _binding!!.tvSelectedAllVoucher.text = it.toString()
         }
 
         return binding.root
+
+    }
+
+
+    private fun showsCustomDialogBox(message: String?) {
+        val dialog = context?.let { Dialog(it) }
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.setCancelable(false)
+        dialog?.setContentView(R.layout.custom_dialog)
+        val apply: TextView? = dialog?.findViewById(R.id.tvApply)
+        val dontApply: TextView? = dialog?.findViewById(R.id.tvDontApply)
+
+        apply?.setOnClickListener {
+            Toast.makeText(context, "Apply Vouchers Completed", Toast.LENGTH_LONG).show()
+            dialog.dismiss()
+        }
+        dontApply?.setOnClickListener {
+            dialog.dismiss()
+            dismiss()
+        }
+        dialog?.show()
 
     }
 

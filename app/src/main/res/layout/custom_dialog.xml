@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="270dp"
+    android:layout_height="170dp"
+    app:cardCornerRadius="14px"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F2F2F2">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/custom_item">
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Do you want to apply your selected vouchers ?"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginVertical="19dp"
+            android:layout_marginHorizontal="16dp"
+            />
+        <TextView
+            android:id="@+id/tvApply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="17sp"
+            android:textColor="#007AFF"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="36dp"
+            android:text="Apply selected vouchers"/>
+        <TextView
+            android:id="@+id/tvDontApply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="17sp"
+            android:textColor="#007AFF"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="85dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:text="Do not apply"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

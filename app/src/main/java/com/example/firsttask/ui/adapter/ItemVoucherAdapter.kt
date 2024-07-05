@@ -20,6 +20,8 @@ class ItemVoucherAdapter() :
     var event: ButtonClickEvent? = null
     var count = 0
     var sum = 0.0
+    var minus = 0.0
+    var minusSelected = 0
 
     inner class ItemVoucherAdapterViewHolder(private var binding: ItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -57,6 +59,24 @@ class ItemVoucherAdapter() :
         }
         return sum
     }
+    private fun calMinusTotal() : Double {
+        var minus : Double = 0.0
+        item.forEach{
+            if (it.checked){
+                minus -= it.amountt
+            }
+        }
+        return minus
+    }
+    private fun calMinusSelected() : Int {
+        var minus : Int = 0
+        item.forEach{
+            if (it.checked){
+                minus--
+            }
+        }
+        return minus
+    }
     private fun countItem() : Int{
         var count : Int = 0
         item.forEach{
@@ -91,8 +111,20 @@ class ItemVoucherAdapter() :
             event?.clickItem(count)
             event?.clickItemSGD(sum)
             notifyDataSetChanged()
-
         }
+
+    }
+    // change select to unselect when click
+    fun changeUnselect(select: Boolean){
+        item.forEach {
+            it.checked = !select
+            minus = calMinusTotal()
+            minusSelected = calMinusSelected()
+            event?.clickItem(minusSelected)
+            event?.clickItemSGD(minus)
+            notifyDataSetChanged()
+        }
+
     }
 
 }

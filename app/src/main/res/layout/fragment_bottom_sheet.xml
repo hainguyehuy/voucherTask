@@ -46,7 +46,7 @@
             android:src="@drawable/right_icons"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.571"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
@@ -142,7 +142,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout4"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginStart="24dp"
@@ -152,7 +152,7 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/csL2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.571"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnContinue"
             app:layout_constraintVertical_bias="0.0">
@@ -161,7 +161,7 @@
                 android:id="@+id/tvDisplayVouchers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="120dp"
+                android:layout_marginRight="100dp"
                 android:layout_weight="700"
                 android:text="Displaying 54 of 54 vouchers"
                 android:textColor="#121212"
@@ -173,11 +173,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:layout_weight="700"
-                android:lineHeight="16dp"
+                android:textStyle="bold"
                 android:text="Select all 54 vouchers"
                 android:textColor="#7A35B0"
                 android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvUnSelectedAllVoucher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:textStyle="bold"
+                android:text="Select all 54 vouchers"
+                android:textColor="#7A35B0"
+                android:textSize="12sp"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
