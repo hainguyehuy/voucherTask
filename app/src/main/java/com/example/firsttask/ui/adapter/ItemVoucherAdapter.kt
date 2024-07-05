@@ -20,7 +20,6 @@ class ItemVoucherAdapter() :
     var event: ButtonClickEvent? = null
     var count = 0
     var sum = 0.0
-    val isCheck = true
 
     inner class ItemVoucherAdapterViewHolder(private var binding: ItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -28,21 +27,45 @@ class ItemVoucherAdapter() :
             binding.tvNameVoucher.text = item.name
             binding.tvEXP.text = item.exp
             binding.tvProvider.text = item.provider
-            binding.imgPlus.setOnClickListener {
-                count += 1
-                sum += item.amountt
-                if (item.checked) {
-                    event!!.clickItem(count)
-                    event!!.clickItemSGD(sum)
-                    binding.imgPlus.setImageResource(R.drawable.quantity)
-                    binding.imgPlus.isEnabled
-                }
 
+            // change icon
+            if(item.checked){
+                binding.imgPlus.setImageResource(R.drawable.quantity)
             }
-
+            else{
+                binding.imgPlus.setImageResource(R.drawable.plus)
+            }
+            //handle click plus
+            binding.imgPlus.setOnClickListener {
+                item.checked = !item.checked
+                sum = calTotal()
+                count = countItem()
+                event?.clickItemSGD(sum)
+                event?.clickItem(count)
+                notifyItemChanged(layoutPosition)
+            }
         }
-    }
 
+
+    }
+    private fun calTotal() : Double {
+        var sum : Double = 0.0
+        item.forEach{
+            if (it.checked){
+                sum += it.amountt
+            }
+        }
+        return sum
+    }
+    private fun countItem() : Int{
+        var count : Int = 0
+        item.forEach{
+            if (it.checked){
+                count++
+            }
+        }
+        return count
+    }
     override fun onBindViewHolder(holder: ItemVoucherAdapterViewHolder, position: Int) {
         holder.bind(item[position])
 
@@ -63,6 +86,10 @@ class ItemVoucherAdapter() :
     fun clickSelectedAll(select: Boolean) {
         item.forEach {
             it.checked = select
+            sum = calTotal()
+            count = countItem()
+            event?.clickItem(count)
+            event?.clickItemSGD(sum)
             notifyDataSetChanged()
 
         }

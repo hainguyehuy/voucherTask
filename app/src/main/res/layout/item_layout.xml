@@ -7,7 +7,7 @@
 
         <variable
             name="voucher"
-            type="com.example.firsttask.data.model.Item" />
+            type="com.example.firsttask.data.model.Item_Voucher" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="700"
-                android:text="Changi Airport Group"
+                android:text="a"
                 android:textSize="11sp"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="132dp"
@@ -66,7 +66,7 @@
                 android:id="@+id/tvNameVoucher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$10 off min spend $80  Second line"
+                android:text="a"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="MissingConstraints"
@@ -77,7 +77,7 @@
                 android:id="@+id/tvEXP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Valid till DD MM YYYY"
+                android:text="a"
                 android:textSize="12sp"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="125dp"

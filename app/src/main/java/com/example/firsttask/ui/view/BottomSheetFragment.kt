@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.firsttask.data.model.voucherX
 import com.example.firsttask.databinding.FragmentBottomSheetBinding
 import com.example.firsttask.ui.adapter.ItemVoucherAdapter
 import com.example.firsttask.ui.viewmodel.VoucherViewModel
@@ -22,7 +23,8 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
     private var _binding: FragmentBottomSheetBinding? = null
     private val itemVoucherAdapter = ItemVoucherAdapter()
     private val binding get() = _binding!!
-
+    val select  = "Select all"
+    val display = "Displaying"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +41,9 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         }
 
         viewModel.vouchers.observe(this) {
+            _binding!!.tvSelectedAllVoucher.text = StringBuilder().append(select).append(" ").append(it.size.toString())
+            _binding!!.tvDisplayVouchers.text = StringBuilder().append(display).append(" ").append(it.size.toString()).append(" of ${it.size} vouchers")
+
             itemVoucherAdapter.updateItemData(it)
         }
         viewModel.fetchVoucher()
@@ -54,6 +59,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         viewModel.checked.observe(this){
             _binding!!.tvSelectedAllVoucher.text = it.toString()
         }
+
         return binding.root
 
     }

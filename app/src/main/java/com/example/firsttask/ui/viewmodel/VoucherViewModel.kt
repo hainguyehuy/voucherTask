@@ -32,7 +32,7 @@ class VoucherViewModel : ViewModel() {
                                 item.amount.toDouble(),
                                 item.provider,
                                 item.exp,
-                                true,
+                                false,
                                 item.name,
                                 item.minSpend,
                                 item.id

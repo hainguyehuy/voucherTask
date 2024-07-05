@@ -6,6 +6,6 @@ import retrofit2.Response
 
 class RetrofitRepository {
     suspend fun getVouchers() : List<Item>{
-        return RetrofitClient.apiService.getData().body()?.result?.items?: listOf()
+        return RetrofitClient.apiService.getData().result?.items?: listOf()
     }
 }
