@@ -15,6 +15,7 @@ class VoucherViewModel : ViewModel() {
     private val _vouchers = MutableLiveData<List<Item_Voucher>>()
     var vouchers: LiveData<List<Item_Voucher>> = _vouchers
 
+
     var amountSelected = MutableLiveData<Int>()
     var sgdSelected = MutableLiveData<Double>()
     var checked = MutableLiveData<Boolean>()
@@ -35,12 +36,15 @@ class VoucherViewModel : ViewModel() {
                                 false,
                                 item.name,
                                 item.minSpend,
-                                item.id
+                                item.id,
+                                item.type
                             )
                         )
                     )
                 }
+                arrayList.sortBy { it.type }
                 _vouchers.postValue(arrayList)
+
                 Log.d("data", "${response.size}")
             } catch (e: Exception) {
                 Log.e("error", "${e.message.toString()}")

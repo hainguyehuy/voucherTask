@@ -9,6 +9,8 @@ data class Item_Voucher(
     val name: String,
     val minSpend: String,
     val id: Int,
+    val type : Int
 
+) {
 
-)
+}

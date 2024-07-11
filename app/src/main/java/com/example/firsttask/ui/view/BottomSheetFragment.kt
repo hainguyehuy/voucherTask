@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firsttask.R
@@ -32,7 +33,9 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
     private val viewModel: VoucherViewModel by viewModels()
     private var _binding: FragmentBottomSheetBinding? = null
     private val itemVoucherAdapter = ItemVoucherAdapter()
-//    private val listVoucher = ArrayList<Item_Voucher>()
+    private val voucherList = ArrayList<Item_Voucher>()
+
+    //    private val listVoucher = ArrayList<Item_Voucher>()
     private val binding get() = _binding!!
     val select = "Select all"
     val display = "Displaying"
@@ -45,25 +48,25 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
 
         _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         _binding!!.rvVoucher.layoutManager = LinearLayoutManager(context)
+
+
+
         _binding!!.rvVoucher.adapter = itemVoucherAdapter
+        itemVoucherAdapter.updateItemData(voucherList)
 
-        //handle event click selectedAll
+
+        //handle selectAll
         _binding!!.tvSelectedAllVoucher.setOnClickListener {
-            itemVoucherAdapter.clickSelectedAll(true)
-            viewModel.vouchers.observe(this){
-                _binding!!.tvSelectedAllVoucher.text =
+            val isCorrect = checkCondition()
+            viewModel.vouchers.observe(this) {
+                _binding!!.tvSelectedAllVoucher.text = if (isCorrect) {
                     StringBuilder().append(unSelect).append(" ").append(it.size.toString())
-                _binding!!.tvSelectedAllVoucher.setOnClickListener{
-                    itemVoucherAdapter.changeUnselect(true)
-                    viewModel.vouchers.observe(this) {
-                        _binding!!.tvSelectedAllVoucher.text =
-                            StringBuilder().append(select).append(" ").append(it.size.toString())
-                    }
+                } else {
+                    StringBuilder().append(select).append(" ").append(it.size.toString())
                 }
-
             }
-
         }
+        //handle event click X icon
         _binding!!.rightIcon.setOnClickListener {
             val message: String? = "Do you want to apply your selected vouchers"
             showsCustomDialogBox(message)
@@ -72,12 +75,9 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         viewModel.vouchers.observe(this) {
             _binding!!.tvSelectedAllVoucher.text =
                 StringBuilder().append(select).append(" ").append(it.size.toString())
-            _binding!!.tvUnSelectedAllVoucher.text =
-                StringBuilder().append(unSelect).append(" ").append(it.size.toString())
             _binding!!.tvDisplayVouchers.text =
                 StringBuilder().append(display).append(" ").append(it.size.toString())
                     .append(" of ${it.size} vouchers")
-
             itemVoucherAdapter.updateItemData(it)
         }
         viewModel.fetchVoucher()
@@ -86,10 +86,12 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         itemVoucherAdapter.event = this
         viewModel.amountSelected.observe(this) {
             _binding!!.tvSelected.text =
-                StringBuilder().append("Selected vouchers " + "(${it.toString()})")
+                StringBuilder().append("Selected vouchers " + "(${it})")
+            _binding!!.tvSelectedAllVoucher.text =
+                StringBuilder().append(unSelect).append(" (${it})")
         }
         viewModel.sgdSelected.observe(this) {
-            _binding!!.tvSGD.text = StringBuilder().append("SGD " + "${it.toString()}")
+            _binding!!.tvSGD.text = StringBuilder().append("SGD " + "${it.toDouble()}")
         }
         viewModel.checked.observe(this) {
             _binding!!.tvSelectedAllVoucher.text = it.toString()
@@ -97,6 +99,17 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
 
         return binding.root
 
+    }
+
+    private fun checkCondition(): Boolean {
+        var result: Boolean = true
+        if (result) {
+            itemVoucherAdapter.clickSelectedAll(true)
+
+        } else {
+            itemVoucherAdapter.changeUnselect(true)
+        }
+        return result
     }
 
 

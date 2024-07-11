@@ -8,6 +8,7 @@
         <variable
             name="voucher"
             type="com.example.firsttask.data.model.Item_Voucher" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,7 +101,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:visibility="visible"/>
         <ImageView
             android:id="@+id/imgQuantity"
             android:layout_width="24dp"
@@ -119,6 +121,50 @@
             app:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints"
             android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/imgPlusGray"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="291dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="29dp"
+            android:src="@drawable/plusgray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="MissingConstraints"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/OnlySelectOne"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_underitem"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llText"
+            tools:ignore="MissingConstraints"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:text="Only 1 of this voucher can be used per transaction. "
+                android:textColor="#254687"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

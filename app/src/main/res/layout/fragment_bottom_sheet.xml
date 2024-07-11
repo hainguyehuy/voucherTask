@@ -177,16 +177,16 @@
                 android:text="Select all 54 vouchers"
                 android:textColor="#7A35B0"
                 android:textSize="12sp" />
-            <TextView
-                android:id="@+id/tvUnSelectedAllVoucher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:textStyle="bold"
-                android:text="Select all 54 vouchers"
-                android:textColor="#7A35B0"
-                android:textSize="12sp"
-                android:visibility="gone"/>
+<!--            <TextView-->
+<!--                android:id="@+id/tvUnSelectedAllVoucher"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="4dp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:text="Select all 54 vouchers"-->
+<!--                android:textColor="#7A35B0"-->
+<!--                android:textSize="12sp"-->
+<!--                android:visibility="gone"/>-->
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -210,7 +210,8 @@
                 tools:itemCount="2"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="421dp"
-                tools:listitem="@layout/item_layout" />
+                tools:listitem="@layout/item_layout"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
