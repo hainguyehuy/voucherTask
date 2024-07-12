@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.firsttask.data.model.Item_Voucher
 import com.example.firsttask.data.repository.RetrofitRepository
+import com.example.firsttask.ui.view.ButtonClickEvent
 import kotlinx.coroutines.launch
 
 class VoucherViewModel : ViewModel() {
@@ -15,13 +16,15 @@ class VoucherViewModel : ViewModel() {
     private val _vouchers = MutableLiveData<List<Item_Voucher>>()
     var vouchers: LiveData<List<Item_Voucher>> = _vouchers
 
-
     var amountSelected = MutableLiveData<Int>()
     var sgdSelected = MutableLiveData<Double>()
     var checked = MutableLiveData<Boolean>()
-
+    var sum : Double = 0.0
+    var count : Int = 0
+    var event : ButtonClickEvent? = null
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {
+
         viewModelScope.launch {
             try {
                 val response = retrofitRepository.getVouchers()
@@ -42,6 +45,7 @@ class VoucherViewModel : ViewModel() {
                         )
                     )
                 }
+
                 arrayList.sortBy { it.type }
                 _vouchers.postValue(arrayList)
 
@@ -52,7 +56,16 @@ class VoucherViewModel : ViewModel() {
         }
 
     }
+    fun eventClickSelectAll(){
+        val voucher = _vouchers.value
+        voucher?.forEach {
+            if(it.type ==1 && it.checked){
+                count ++
+                sum += it.amountt
+            }
+        }
 
+    }
     fun updateAmountSelected(count: Int) {
         amountSelected.postValue(count)
     }

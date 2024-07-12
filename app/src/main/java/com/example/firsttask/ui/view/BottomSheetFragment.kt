@@ -45,15 +45,11 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         _binding!!.rvVoucher.layoutManager = LinearLayoutManager(context)
 
-
-
         _binding!!.rvVoucher.adapter = itemVoucherAdapter
         itemVoucherAdapter.updateItemData(voucherList)
-
 
         //handle selectAll
         _binding!!.tvSelectedAllVoucher.setOnClickListener {
@@ -80,34 +76,33 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
                     .append(" of ${it.size} vouchers")
             itemVoucherAdapter.updateItemData(it)
         }
+        viewModel.eventClickSelectAll()
         viewModel.fetchVoucher()
 
-
-        itemVoucherAdapter.event = this
-        viewModel.amountSelected.observe(this) {
-            _binding!!.tvSelected.text =
-                StringBuilder().append("Selected vouchers " + "(${it})")
-            _binding!!.tvSelectedAllVoucher.text =
-                StringBuilder().append(unSelect).append(" (${it})")
-        }
-        viewModel.sgdSelected.observe(this) {
-            _binding!!.tvSGD.text = StringBuilder().append("SGD " + "${it.toDouble()}")
-        }
-        viewModel.checked.observe(this) {
-            _binding!!.tvSelectedAllVoucher.text = it.toString()
-        }
-
+        //observe
+//        itemVoucherAdapter.event = this
+//        viewModel.amountSelected.observe(this) {
+//            _binding!!.tvSelected.text =
+//                StringBuilder().append("Selected vouchers " + "(${it})")
+//            _binding!!.tvSelectedAllVoucher.text =
+//                StringBuilder().append(unSelect).append(" (${it})")
+//        }
+//        viewModel.sgdSelected.observe(this) {
+//            _binding!!.tvSGD.text = StringBuilder().append("SGD " + "${it.toDouble()}")
+//        }
+//        viewModel.checked.observe(this) {
+//            _binding!!.tvSelectedAllVoucher.text = it.toString()
+//        }
         return binding.root
-
     }
 
     private fun checkCondition(): Boolean {
         var result: Boolean = true
         if (result) {
-            itemVoucherAdapter.clickSelectedAll(true)
+            viewModel.eventClickSelectAll()
 
         } else {
-            itemVoucherAdapter.changeUnselect(true)
+
         }
         return result
     }
@@ -130,10 +125,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
             dismiss()
         }
         dialog?.show()
-
     }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
