@@ -60,14 +60,15 @@ class VoucherViewModel : ViewModel() {
         val voucher = _vouchers.value
         voucher?.forEach {
             if(it.type ==1 && it.checked){
+                it.checked = !it.checked
                 count ++
                 sum += it.amountt
             }
         }
 
     }
-    fun updateAmountSelected(count: Int) {
-        amountSelected.postValue(count)
+    fun updateAmountSelected(positon: Int) {
+        amountSelected.postValue(positon)
     }
 
     fun updateSGDSelected(sum: Double) {

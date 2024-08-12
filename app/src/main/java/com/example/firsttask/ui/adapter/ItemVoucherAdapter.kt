@@ -64,11 +64,11 @@ class ItemVoucherAdapter() :
 
             //handle click plus
             binding.imgPlus.setOnClickListener {
-                item.checked = !item.checked
-                sum = calTotal()
-                count = countItem()
+//                item.checked = !item.checked
+//                sum = calTotal()
+//                count = countItem()
                 event?.clickItemSGD(sum)
-                event?.clickItem(count)
+                event?.clickItem(layoutPosition)
                 notifyItemChanged(layoutPosition)
             }
         }

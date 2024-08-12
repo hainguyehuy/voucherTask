@@ -80,19 +80,19 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         viewModel.fetchVoucher()
 
         //observe
-//        itemVoucherAdapter.event = this
-//        viewModel.amountSelected.observe(this) {
-//            _binding!!.tvSelected.text =
-//                StringBuilder().append("Selected vouchers " + "(${it})")
-//            _binding!!.tvSelectedAllVoucher.text =
-//                StringBuilder().append(unSelect).append(" (${it})")
-//        }
-//        viewModel.sgdSelected.observe(this) {
-//            _binding!!.tvSGD.text = StringBuilder().append("SGD " + "${it.toDouble()}")
-//        }
-//        viewModel.checked.observe(this) {
-//            _binding!!.tvSelectedAllVoucher.text = it.toString()
-//        }
+        itemVoucherAdapter.event = this
+        viewModel.amountSelected.observe(this) {
+            _binding!!.tvSelected.text =
+                StringBuilder().append("Selected vouchers " + "(${it})")
+            _binding!!.tvSelectedAllVoucher.text =
+                StringBuilder().append(unSelect).append(" (${it})")
+        }
+        viewModel.sgdSelected.observe(this) {
+            _binding!!.tvSGD.text = StringBuilder().append("SGD " + "${it.toDouble()}")
+        }
+        viewModel.checked.observe(this) {
+            _binding!!.tvSelectedAllVoucher.text = it.toString()
+        }
         return binding.root
     }
 
@@ -136,8 +136,8 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         _binding = null
     }
 
-    override fun clickItem(count: Int) {
-        viewModel.updateAmountSelected(count)
+    override fun clickItem(position: Int) {
+        viewModel.updateAmountSelected(position)
     }
 
     override fun clickItemSGD(sum: Double) {
