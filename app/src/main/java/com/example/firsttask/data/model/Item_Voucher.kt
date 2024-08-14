@@ -8,6 +8,6 @@ data class Item_Voucher(
     var checked : Boolean = false,
     val name: String,
     val minSpend: String,
-    val id: Int,
+    val id: String,
     val type : Int
 )

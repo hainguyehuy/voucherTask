@@ -2,7 +2,6 @@ package com.example.firsttask.data.repository
 
 import com.example.firsttask.data.api.RetrofitClient
 import com.example.firsttask.data.model.Item
-import retrofit2.Response
 
 class RetrofitRepository {
     suspend fun getVouchers() : List<Item>{

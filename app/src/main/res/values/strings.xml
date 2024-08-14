@@ -2,4 +2,12 @@
     <string name="app_name">FirstTask</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="selected_vouchers_0">Selected vouchers (0)</string>
+    <string name="your_voucher">Your Voucher</string>
+    <string name="new_payable_amount">New payable amount</string>
+    <string name="displaying_54_of_54_vouchers">Displaying 54 of 54 vouchers</string>
+    <string name="select_all_54_vouchers">Select all 54 vouchers</string>
+    <string name="sgd_0_00">SGD 0.00</string>
+    <string name="newpayable">-</string>
+    <string name="conti">Continue</string>
 </resources>
