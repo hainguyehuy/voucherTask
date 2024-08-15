@@ -14,8 +14,6 @@ import kotlinx.coroutines.launch
 
 class VoucherViewModel : ViewModel() {
     private val retrofitRepository = RetrofitRepository()
-    private val _vouchers = MutableLiveData<List<ItemVoucherState>>()
-    var vouchers: LiveData<List<ItemVoucherState>> = _vouchers
     val data = ItemVoucherSelectionState(
         isLoading = false,
         paymentAmount = 0.0,
@@ -82,46 +80,9 @@ class VoucherViewModel : ViewModel() {
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {
         viewModelScope.launch {
-//            val itemVoucherSelectionState = ItemVoucherSelectionState()
-//            itemVoucherSelectionState.data
-//            val newData  =
 
-            _vouchers.postValue(data1.data)
         }
-
-
-//        viewModelScope.launch {
-//            try {
-//                val response = retrofitRepository.getVouchers()
-//                val newData = response.map {
-//                    ItemVoucherState.mapItemVoucher(it)
-//                }
-//                _vouchers.postValue(newData)
-//
-//                Log.d("data", "${response.size}")
-//            } catch (e: Exception) {
-//                Log.e("error", "${e.message.toString()}")
-//            }
-//
-//        }
     }
-
-    var amountSelected = MutableLiveData<Int>()
-    var sgdSelected = MutableLiveData<Double>()
-    var checked = MutableLiveData<Boolean>()
-
-    fun updateAmountSelected(position: Int) {
-        amountSelected.postValue(position)
-    }
-
-    fun updateSGDSelected(sum: Double) {
-        sgdSelected.postValue(sum)
-    }
-
-    fun updateSelectedItem(isChecked: Boolean) {
-        checked.postValue(isChecked)
-    }
-
     fun onClick(itemVoucherState: ItemVoucherState) {
 
     }

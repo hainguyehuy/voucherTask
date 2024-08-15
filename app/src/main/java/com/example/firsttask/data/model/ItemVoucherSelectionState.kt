@@ -1,5 +1,7 @@
 package com.example.firsttask.data.model
 
+import androidx.fragment.app.viewModels
+import com.example.firsttask.ui.viewmodel.VoucherViewModel
 import java.io.Serializable
 
 class ItemVoucherSelectionState(
@@ -12,6 +14,7 @@ class ItemVoucherSelectionState(
     val data: List<ItemVoucherState> = mutableListOf()
 
 ) : Serializable {
+
     fun total(): Double {
 
         data.forEach {
@@ -26,13 +29,7 @@ class ItemVoucherSelectionState(
         get() = data.count {
             it.status == ItemVoucherState.Status.Selected
         }
-//    fun selectedOrUnselectedItem(data: List<ItemVoucherState>){
-//        if (selectedVoucher == data.size) {
-//            "UnSelected all "
-//        } else {
-//            "Selected All ${data.size} "
-//        }
-//    }
+
     val selectedOrUnselectedItem
         get() = if (selectedVoucher == data.size) {
             "UnSelected all "
