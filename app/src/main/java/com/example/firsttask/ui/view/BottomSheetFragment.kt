@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firsttask.R
+import com.example.firsttask.data.model.ItemVoucherSelectionState
 import com.example.firsttask.data.model.ItemVoucherState
 import com.example.firsttask.data.model.Item_Voucher
 import com.example.firsttask.data.model.voucherX
@@ -39,6 +40,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
     private val viewModel: VoucherViewModel by viewModels()
     private var _binding: FragmentBottomSheetBinding? = null
     private val binding get() = _binding!!
+    val itemVoucherSelectionState = ItemVoucherSelectionState()
     private val voucherList = ArrayList<ItemVoucherState>()
 
 
@@ -48,9 +50,6 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         viewModel.onClick(itemVoucherState)
 
     }
-//    val select = "Select all"
-//    val display = "Displaying"
-//    val unSelect = "UnSelect all "
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,12 +59,38 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         _binding!!.rvVoucher.layoutManager = LinearLayoutManager(context)
 
         _binding!!.rvVoucher.adapter = itemVoucherAdapter
-        viewModel.vouchers.observe(this){
+
+        viewModel.vouchers.observe(this) {
             itemVoucherAdapter.updateItemData(it)
         }
-
+        _binding!!.rightIcon.setOnClickListener {
+            val message: String? = "Do you want to apply your selected vouchers"
+            showsCustomDialogBox(message)
+        }
         viewModel.fetchVoucher()
+
+        viewModel.vouchers.observe(this) {
+            _binding!!.tvAmount.text =
+                StringBuilder().append("SGD ${itemVoucherSelectionState.paymentAmount}")
+            _binding!!.tvSGD.text =
+                StringBuilder().append("SGD ${itemVoucherSelectionState.total()}")
+            _binding!!.tvDisplayVouchers.text =
+                StringBuilder().append("Display ${itemVoucherSelectionState.data.size} of ${itemVoucherSelectionState.data.size} vouchers")
+            _binding!!.tvSelectedAllVoucher.text = itemVoucherSelectionState.selectedOrUnselectedItem
+            _binding!!.tvSelected.text =
+                StringBuilder().append("Selected Voucher (${itemVoucherSelectionState.selectedVoucher})")
+        }
+
+//        _binding!!.tvSelectedAllVoucher.setOnClickListener {
+//            val itemSelected = ItemVoucherSelectionState()
+//            viewModel.vouchers.observe(this){
+//                itemSelected.totalCount = it.size
+//
+//            }
+//            _binding!!.tvSelectedAllVoucher.text = itemSelected.totalCount.toString()
+//        }
         return binding.root
+
 
         //handle selectAll
 //        _binding!!.tvSelectedAllVoucher.setOnClickListener {
@@ -77,12 +102,6 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
 //                    StringBuilder().append(select).append(" ").append(it.size.toString())
 //                }
 //            }
-//        }
-
-        //handle event click X icon
-//        _binding!!.rightIcon.setOnClickListener {
-//            val message: String? = "Do you want to apply your selected vouchers"
-//            showsCustomDialogBox(message)
 //        }
 
 //        viewModel.vouchers.observe(this) {

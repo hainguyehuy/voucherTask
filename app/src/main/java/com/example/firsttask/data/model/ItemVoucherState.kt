@@ -2,6 +2,7 @@ package com.example.firsttask.data.model
 
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import com.example.firsttask.R
 
 class ItemVoucherState(
     val id: String,
@@ -9,9 +10,9 @@ class ItemVoucherState(
 //    val image : Uri,
     val provider: String,
     val name: String,
-//    val status : Status = Status.Default,
+    val status : Status = Status.Default,
 //    val type : Boolean,
-    val rawData: Item
+//    val rawData: Item
 
 ) {
     enum class Status {
@@ -19,7 +20,14 @@ class ItemVoucherState(
         Selected,
         Disable;
 
-        fun selectionStatus() = this
+//        fun selectionStatus() : Int{
+//            return when(this){
+//                Default -> R.drawable.plus
+//                Selected -> R.drawable.quantity
+//                Disable -> R.drawable.plusgray
+//                else -> {R.drawable.plus}
+//            }
+//        }
     }
 
     companion object {
@@ -28,7 +36,7 @@ class ItemVoucherState(
             amount = rawData.amount.toDouble(),
             name = rawData.name,
             provider = rawData.provider,
-            rawData = rawData
+//            rawData = rawData
         )
     }
 }

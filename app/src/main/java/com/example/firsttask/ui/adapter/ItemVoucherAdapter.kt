@@ -58,17 +58,23 @@ class ItemVoucherAdapter(private val onClickItem : (ItemVoucherState) -> Unit) :
             }
             // bỏ comment từng dòng bên dưới, rồi chạy lại để xem kết quả
 
-//            th 1. ivPlus: disable
-            binding.ivPlus.isActivated = false
-            binding.ivPlus.isEnabled = false
-//
-////          th 2. ivPlus: select = no
-//            binding.ivPlus.isActivated = false
-//            binding.ivPlus.isEnabled = true
+            when(item.status){
+                ItemVoucherState.Status.Disable -> {
+                    binding.ivPlus.isActivated = false
+                    binding.ivPlus.isEnabled = false
+                }
+                ItemVoucherState.Status.Default -> {
+                    binding.ivPlus.isActivated = false
+                    binding.ivPlus.isEnabled = true
+                }
+                ItemVoucherState.Status.Selected -> {
+                    binding.ivPlus.isActivated = true
+                    binding.ivPlus.isEnabled = true
+                    binding.voucher
+                }
 
-////          th 3. ivPlus: select = yet
-//            binding.ivPlus.isActivated = true
-//            binding.ivPlus.isEnabled = true
+            }
+
         }
     }
 }
