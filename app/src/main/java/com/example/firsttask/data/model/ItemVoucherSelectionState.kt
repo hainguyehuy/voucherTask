@@ -5,7 +5,6 @@ import java.io.Serializable
 class ItemVoucherSelectionState(
     var isLoading: Boolean = false,
     var paymentAmount: Double = 0.0,
-    var totalVoucherAmount: Double = 0.0,
     var displayItem: Int = 3,
     var totalCount: Int = 0,
     var selectCount: Int = 0,

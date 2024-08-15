@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firsttask.data.model.Item
 import com.example.firsttask.databinding.ItemLayoutBinding
-import com.example.firsttask.ui.view.ButtonClickEvent
 
 class VoucherAdapter() : RecyclerView.Adapter<VoucherAdapter.VoucherViewHolder>(){
     //khai bao interface
-    var event : ButtonClickEvent?= null
+//    var event : ButtonClickEvent?= null
     var count = 0
     var sum = 0.0
     private val item : MutableList<Item> = mutableListOf()

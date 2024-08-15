@@ -3,13 +3,9 @@ package com.example.firsttask.ui.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.firsttask.R
 import com.example.firsttask.data.model.ItemVoucherState
-import com.example.firsttask.data.model.Item_Voucher
 import com.example.firsttask.databinding.ItemLayoutBinding
-import com.example.firsttask.ui.view.ButtonClickEvent
 
 class ItemVoucherAdapter(private val onClickItem : (ItemVoucherState) -> Unit) :
     RecyclerView.Adapter<ItemVoucherAdapter.ItemVoucherAdapterViewHolder>() {
@@ -23,7 +19,7 @@ class ItemVoucherAdapter(private val onClickItem : (ItemVoucherState) -> Unit) :
         notifyDataSetChanged()
     }
 
-    var event: ButtonClickEvent? = null
+//    var event: ButtonClickEvent? = null
     var count = 0
     var sum = 0.0
     var minus = 0.0

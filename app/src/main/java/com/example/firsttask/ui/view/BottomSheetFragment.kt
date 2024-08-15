@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firsttask.R
+import com.example.firsttask.data.model.ItemVoucherSelectionState
 import com.example.firsttask.data.model.ItemVoucherState
 import com.example.firsttask.databinding.FragmentBottomSheetBinding
 import com.example.firsttask.ui.adapter.ItemVoucherAdapter
@@ -24,7 +25,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
     private val binding get() = _binding!!
     private val itemVoucherAdapter = ItemVoucherAdapter(::onClickItem)
     private val viewModel: VoucherViewModel by viewModels()
-
+    val listItem  = listOf<ItemVoucherSelectionState>()
 
 
     private fun onClickItem(itemVoucherState: ItemVoucherState) {
@@ -42,10 +43,22 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
             val message = "Do you want to apply your selected vouchers"
             showsCustomDialogBox(message)
         }
+        viewModel.voucher.observe(this){
+            itemVoucherAdapter.updateItemData(viewModel.dataItem.data)
+        }
+        viewModel.voucher.observe(this) {
+            val data1 = viewModel.dataItem
+            _binding!!.tvAmount.text =
+                StringBuilder().append("SGD ${data1.paymentAmount}")
+            _binding!!.tvSGD.text =
+                StringBuilder().append("SGD ${data1.totalVouchersAmount}")
+            _binding!!.tvDisplayVouchers.text =
+                StringBuilder().append("Display ${data1.displayItem} of ${data1.totalCount} vouchers")
+            _binding!!.tvSelectedAllVoucher.text = data1.selectedOrUnselectedItem
+            _binding!!.tvSelected.text =
+                StringBuilder().append("Selected Voucher (${data1.displayItem})")
+        }
         viewModel.fetchVoucher()
-
-
-
         return binding.root
 
     }

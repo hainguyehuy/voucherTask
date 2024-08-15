@@ -13,11 +13,10 @@ import com.example.firsttask.data.repository.RetrofitRepository
 import kotlinx.coroutines.launch
 
 class VoucherViewModel : ViewModel() {
-    private val retrofitRepository = RetrofitRepository()
-    val data = ItemVoucherSelectionState(
+//    private val retrofitRepository = RetrofitRepository()
+    val dataItem = ItemVoucherSelectionState(
         isLoading = false,
         paymentAmount = 0.0,
-        totalVoucherAmount = 20.0,
         displayItem = 3,
         totalCount = 3,
         selectCount = 2,
@@ -45,10 +44,9 @@ class VoucherViewModel : ViewModel() {
             )
         )
     )
-    val data1 = ItemVoucherSelectionState(
+    val dataItem1 = ItemVoucherSelectionState(
         isLoading = false,
         paymentAmount = 0.0,
-        totalVoucherAmount = 30.0,
         displayItem = 3,
         totalCount = 3,
         selectCount = 3,
@@ -76,10 +74,13 @@ class VoucherViewModel : ViewModel() {
             )
         )
     )
+    private val _voucher: MutableLiveData<ItemVoucherSelectionState> = MutableLiveData(dataItem)
+    var voucher : LiveData<ItemVoucherSelectionState> = _voucher
 
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {
         viewModelScope.launch {
+            _voucher.postValue(dataItem)
         }
     }
     fun onClick(itemVoucherState: ItemVoucherState) {
