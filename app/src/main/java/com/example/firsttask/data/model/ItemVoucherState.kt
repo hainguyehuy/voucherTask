@@ -19,15 +19,6 @@ class ItemVoucherState(
         Default,
         Selected,
         Disable;
-
-//        fun selectionStatus() : Int{
-//            return when(this){
-//                Default -> R.drawable.plus
-//                Selected -> R.drawable.quantity
-//                Disable -> R.drawable.plusgray
-//                else -> {R.drawable.plus}
-//            }
-//        }
     }
 
     companion object {

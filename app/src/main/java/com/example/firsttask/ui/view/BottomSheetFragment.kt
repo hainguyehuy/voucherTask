@@ -18,14 +18,11 @@ import com.example.firsttask.ui.adapter.ItemVoucherAdapter
 import com.example.firsttask.ui.viewmodel.VoucherViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-//
-
 class BottomSheetFragment : BottomSheetDialogFragment(){
     private var _binding: FragmentBottomSheetBinding? = null
     private val binding get() = _binding!!
     private val itemVoucherAdapter = ItemVoucherAdapter(::onClickItem)
     private val viewModel: VoucherViewModel by viewModels()
-    val listItem  = listOf<ItemVoucherSelectionState>()
 
 
     private fun onClickItem(itemVoucherState: ItemVoucherState) {
@@ -43,20 +40,20 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
             val message = "Do you want to apply your selected vouchers"
             showsCustomDialogBox(message)
         }
+
         viewModel.voucher.observe(this){
-            itemVoucherAdapter.updateItemData(viewModel.dataItem.data)
+            itemVoucherAdapter.updateItemData(it.data)
         }
         viewModel.voucher.observe(this) {
-            val data1 = viewModel.dataItem
             _binding!!.tvAmount.text =
-                StringBuilder().append("SGD ${data1.paymentAmount}")
+                StringBuilder().append("SGD ${it.paymentAmount}")
             _binding!!.tvSGD.text =
-                StringBuilder().append("SGD ${data1.totalVouchersAmount}")
+                StringBuilder().append("SGD ${it.totalVouchersAmount}")
             _binding!!.tvDisplayVouchers.text =
-                StringBuilder().append("Display ${data1.displayItem} of ${data1.totalCount} vouchers")
-            _binding!!.tvSelectedAllVoucher.text = data1.selectedOrUnselectedItem
+                StringBuilder().append("Display ${it.displayItem} of ${it.totalCount} vouchers")
+            _binding!!.tvSelectedAllVoucher.text = it.selectedOrUnselectedItem
             _binding!!.tvSelected.text =
-                StringBuilder().append("Selected Voucher (${data1.displayItem})")
+                StringBuilder().append("Selected Voucher (${it.selectedVoucher})")
         }
         viewModel.fetchVoucher()
         return binding.root
