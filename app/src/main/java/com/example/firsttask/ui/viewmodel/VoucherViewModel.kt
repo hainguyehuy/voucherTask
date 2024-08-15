@@ -16,45 +16,77 @@ class VoucherViewModel : ViewModel() {
     private val retrofitRepository = RetrofitRepository()
     private val _vouchers = MutableLiveData<List<ItemVoucherState>>()
     var vouchers: LiveData<List<ItemVoucherState>> = _vouchers
+    val data = ItemVoucherSelectionState(
+        isLoading = false,
+        paymentAmount = 0.0,
+        totalVoucherAmount = 20.0,
+        displayItem = 3,
+        totalCount = 3,
+        selectCount = 2,
+        data = listOf(
+            ItemVoucherState(
+                id = "0",
+                name = "\$10 Min of spend \$80 second line",
+                provider = "Plaza Prenium",
+                status = ItemVoucherState.Status.Selected,
+                amount = 10.0
+            ),
+            ItemVoucherState(
+                id = "0",
+                name = "\$10 Min of spend \$80 second line",
+                provider = "Plaza Prenium",
+                status = ItemVoucherState.Status.Selected,
+                amount = 10.0
+            ),
+            ItemVoucherState(
+                id = "0",
+                name = "\$10 Min of spend \$80 second line",
+                provider = "Plaza Prenium",
+                status = ItemVoucherState.Status.Default,
+                amount = 10.0
+            )
+        )
+    )
+    val data1 = ItemVoucherSelectionState(
+        isLoading = false,
+        paymentAmount = 0.0,
+        totalVoucherAmount = 30.0,
+        displayItem = 3,
+        totalCount = 3,
+        selectCount = 3,
+        data = listOf(
+            ItemVoucherState(
+                id = "0",
+                name = "\$10 Min of spend \$80 second line",
+                provider = "Plaza Prenium",
+                status = ItemVoucherState.Status.Selected,
+                amount = 10.0
+            ),
+            ItemVoucherState(
+                id = "0",
+                name = "\$10 Min of spend \$80 second line",
+                provider = "Plaza Prenium",
+                status = ItemVoucherState.Status.Selected,
+                amount = 10.0
+            ),
+            ItemVoucherState(
+                id = "0",
+                name = "\$10 Min of spend \$80 second line",
+                provider = "Plaza Prenium",
+                status = ItemVoucherState.Status.Selected,
+                amount = 10.0
+            )
+        )
+    )
 
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {
         viewModelScope.launch {
-            val itemVoucherSelectionState = ItemVoucherSelectionState()
-            itemVoucherSelectionState.data
+//            val itemVoucherSelectionState = ItemVoucherSelectionState()
+//            itemVoucherSelectionState.data
 //            val newData  =
-//            ItemVoucherSelectionState(
-//                isLoading = false,
-//                paymentAmount = 0.0,
-//                totalVoucherAmount = 30.0,
-//                displayItem = 3,
-//                totalCount = 3,
-//                selectCount = 3,
-//                data = listOf(
-//                    ItemVoucherState(
-//                        id = "0",
-//                        name = "\$10 Min of spend \$80 second line",
-//                        provider = "Plaza Prenium",
-//                        status = ItemVoucherState.Status.Selected,
-//                        amount = 10.0
-//                    ),
-//                    ItemVoucherState(
-//                        id = "0",
-//                        name = "\$10 Min of spend \$80 second line",
-//                        provider = "Plaza Prenium",
-//                        status = ItemVoucherState.Status.Selected,
-//                        amount = 10.0
-//                    ),
-//                    ItemVoucherState(
-//                        id = "0",
-//                        name = "\$10 Min of spend \$80 second line",
-//                        provider = "Plaza Prenium",
-//                        status = ItemVoucherState.Status.Selected,
-//                        amount = 10.0
-//                    )
-//                )
-//            )
-            _vouchers.postValue(itemVoucherSelectionState.data)
+
+            _vouchers.postValue(data1.data)
         }
 
 
@@ -73,6 +105,7 @@ class VoucherViewModel : ViewModel() {
 //
 //        }
     }
+
     var amountSelected = MutableLiveData<Int>()
     var sgdSelected = MutableLiveData<Double>()
     var checked = MutableLiveData<Boolean>()

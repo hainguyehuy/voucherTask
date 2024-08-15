@@ -9,34 +9,9 @@ class ItemVoucherSelectionState(
     var displayItem: Int = 3,
     var totalCount: Int = 0,
     var selectCount: Int = 0,
-    val data: List<ItemVoucherState> = mutableListOf(
-        ItemVoucherState(
-            id = "0",
-            name = "\$10 Min of spend \$80 second line",
-            provider = "Plaza Prenium",
-            status = ItemVoucherState.Status.Selected,
-            amount = 10.0
-        ),
-        ItemVoucherState(
-            id = "0",
-            name = "\$10 Min of spend \$80 second line",
-            provider = "Plaza Prenium",
-            status = ItemVoucherState.Status.Selected,
-            amount = 10.0
-        ),
-        ItemVoucherState(
-            id = "0",
-            name = "\$10 Min of spend \$80 second line",
-            provider = "Plaza Prenium",
-            status = ItemVoucherState.Status.Default,
-            amount = 10.0
-        )
-    )
+    val data: List<ItemVoucherState> = mutableListOf()
 
 ) : Serializable {
-    //    val total get() = data.forEach {
-//        totalVoucherAmount += it.amount
-//    }
     fun total(): Double {
 
         data.forEach {
@@ -51,6 +26,13 @@ class ItemVoucherSelectionState(
         get() = data.count {
             it.status == ItemVoucherState.Status.Selected
         }
+//    fun selectedOrUnselectedItem(data: List<ItemVoucherState>){
+//        if (selectedVoucher == data.size) {
+//            "UnSelected all "
+//        } else {
+//            "Selected All ${data.size} "
+//        }
+//    }
     val selectedOrUnselectedItem
         get() = if (selectedVoucher == data.size) {
             "UnSelected all "

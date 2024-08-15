@@ -70,15 +70,16 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         viewModel.fetchVoucher()
 
         viewModel.vouchers.observe(this) {
+            val data1 = viewModel.data1
             _binding!!.tvAmount.text =
-                StringBuilder().append("SGD ${itemVoucherSelectionState.paymentAmount}")
+                StringBuilder().append("SGD ${data1.paymentAmount}")
             _binding!!.tvSGD.text =
-                StringBuilder().append("SGD ${itemVoucherSelectionState.total()}")
+                StringBuilder().append("SGD ${data1.totalVoucherAmount}")
             _binding!!.tvDisplayVouchers.text =
-                StringBuilder().append("Display ${itemVoucherSelectionState.data.size} of ${itemVoucherSelectionState.data.size} vouchers")
+                StringBuilder().append("Display ${data1.displayItem} of ${data1.totalCount} vouchers")
             _binding!!.tvSelectedAllVoucher.text = itemVoucherSelectionState.selectedOrUnselectedItem
             _binding!!.tvSelected.text =
-                StringBuilder().append("Selected Voucher (${itemVoucherSelectionState.selectedVoucher})")
+                StringBuilder().append("Selected Voucher (${data1.displayItem})")
         }
 
 //        _binding!!.tvSelectedAllVoucher.setOnClickListener {
