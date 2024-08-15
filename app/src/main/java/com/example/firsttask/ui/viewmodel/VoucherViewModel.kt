@@ -30,18 +30,18 @@ class VoucherViewModel : ViewModel() {
                 amount = 10.0
             ),
             ItemVoucherState(
-                id = "0",
+                id = "1",
                 name = "\$10 Min of spend \$80 second line",
                 provider = "Plaza Prenium",
                 status = ItemVoucherState.Status.Selected,
                 amount = 10.0
             ),
             ItemVoucherState(
-                id = "0",
+                id = "2",
                 name = "\$10 Min of spend \$80 second line",
                 provider = "Plaza Prenium",
                 status = ItemVoucherState.Status.Default,
-                amount = 10.0
+                amount = 5.0
             )
         )
     )
@@ -61,18 +61,18 @@ class VoucherViewModel : ViewModel() {
                 amount = 10.0
             ),
             ItemVoucherState(
-                id = "0",
+                id = "1",
                 name = "\$10 Min of spend \$80 second line",
                 provider = "Plaza Prenium",
                 status = ItemVoucherState.Status.Selected,
                 amount = 10.0
             ),
             ItemVoucherState(
-                id = "0",
+                id = "2",
                 name = "\$10 Min of spend \$80 second line",
                 provider = "Plaza Prenium",
                 status = ItemVoucherState.Status.Selected,
-                amount = 10.0
+                amount = 5.0
             )
         )
     )
@@ -80,7 +80,6 @@ class VoucherViewModel : ViewModel() {
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {
         viewModelScope.launch {
-
         }
     }
     fun onClick(itemVoucherState: ItemVoucherState) {

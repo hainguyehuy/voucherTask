@@ -1,7 +1,5 @@
 package com.example.firsttask.data.model
 
-import androidx.fragment.app.viewModels
-import com.example.firsttask.ui.viewmodel.VoucherViewModel
 import java.io.Serializable
 
 class ItemVoucherSelectionState(
@@ -16,14 +14,17 @@ class ItemVoucherSelectionState(
 ) : Serializable {
 
     fun total(): Double {
-
+        var totalVouchersAmount = 0.0
         data.forEach {
             if (it.status == ItemVoucherState.Status.Selected) {
-                totalVoucherAmount += it.amount
+                totalVouchersAmount += it.amount
             }
         }
-        return totalVoucherAmount
+        return totalVouchersAmount
     }
+    val totalVouchersAmount : Double get() = total()
+
+
 
     val selectedVoucher
         get() = data.count {
