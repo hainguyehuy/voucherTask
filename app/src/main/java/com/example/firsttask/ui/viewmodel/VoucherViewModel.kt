@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.firsttask.data.model.ItemVoucherState
-import com.example.firsttask.data.model.Item_Voucher
 import com.example.firsttask.data.repository.RetrofitRepository
 import kotlinx.coroutines.launch
 
@@ -31,51 +30,13 @@ class VoucherViewModel : ViewModel() {
             } catch (e: Exception) {
                 Log.e("error", "${e.message.toString()}")
             }
-//                response.forEach() { i ->
-//                    arrayList.addAll(
-////                        listOf(
-////                            ItemVoucherState(
-////                                item.id.toString(),
-////                                item.amount.toDouble(),
-////                                item.provider,
-////                                item.name
-//////                                item.amount.toDouble(),
-//////                                item.provider,
-//////                                item.exp,
-//////                                false,
-//////                                item.name,
-//////                                item.minSpend,
-//////                                item.id.toString(),
-//////                                item.type
-////                            )
-////                        )
-//                )
-//                }
-
-
-
 
         }
     }
     var amountSelected = MutableLiveData<Int>()
     var sgdSelected = MutableLiveData<Double>()
     var checked = MutableLiveData<Boolean>()
-//    private var sum: Double = 0.0
-//    private var count: Int = 0
-//    private var event: ButtonClickEvent? = null
-    //    fun eventClickSelectAll(){
-//        val voucher = _vouchers.value
-//        voucher?.forEach {
-//            if(it.type ==1 && it.checked){
-//                it.checked = !it.checked
-//                count ++
-//                sum += it.amountt
-//                event?.clickItemSGD(sum)
-//                event?.clickItem(count)
-//            }
-//        }
-//
-//    }
+
     fun updateAmountSelected(position: Int) {
         amountSelected.postValue(position)
     }
@@ -87,8 +48,9 @@ class VoucherViewModel : ViewModel() {
     fun updateSelectedItem(isChecked: Boolean) {
         checked.postValue(isChecked)
     }
-//
-//    fun onClickItem(item: Item_Voucher) {
-//        _event.value = Event(item)
-//    }
+
+    fun onClick(itemVoucherState: ItemVoucherState) {
+
+    }
+
 }

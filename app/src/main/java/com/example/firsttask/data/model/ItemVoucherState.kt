@@ -23,8 +23,6 @@ class ItemVoucherState(
     }
 
     companion object {
-        val status = Status.Default
-
         fun mapItemVoucher(rawData: Item): ItemVoucherState = ItemVoucherState(
             id = rawData.id.toString(),
             amount = rawData.amount.toDouble(),

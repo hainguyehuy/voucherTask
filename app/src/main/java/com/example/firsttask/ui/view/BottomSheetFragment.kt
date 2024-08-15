@@ -32,16 +32,22 @@ interface ButtonClickEvent {
     fun clickItem(count: Int)
     fun clickItemSGD(sum: Double)
     fun clickSelectAll(isChecked: Boolean)
+
 }
 
 class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
     private val viewModel: VoucherViewModel by viewModels()
     private var _binding: FragmentBottomSheetBinding? = null
-    private val itemVoucherAdapter = ItemVoucherAdapter()
+    private val binding get() = _binding!!
     private val voucherList = ArrayList<ItemVoucherState>()
 
-    //    private val listVoucher = ArrayList<Item_Voucher>()
-    private val binding get() = _binding!!
+
+    private val itemVoucherAdapter = ItemVoucherAdapter(::onClickItem)
+
+    private fun onClickItem(itemVoucherState: ItemVoucherState) {
+        viewModel.onClick(itemVoucherState)
+
+    }
 //    val select = "Select all"
 //    val display = "Displaying"
 //    val unSelect = "UnSelect all "
@@ -57,6 +63,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), ButtonClickEvent {
         viewModel.vouchers.observe(this){
             itemVoucherAdapter.updateItemData(it)
         }
+
         viewModel.fetchVoucher()
         return binding.root
 
