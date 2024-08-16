@@ -1,7 +1,5 @@
 package com.example.firsttask.data.model
 
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import com.example.firsttask.R
 
 class ItemVoucherState(
@@ -15,10 +13,10 @@ class ItemVoucherState(
 //    val rawData: Item
 
 ) {
-    enum class Status {
-        Default,
-        Selected,
-        Disable;
+    enum class Status(plus: Int) {
+        Default(R.drawable.plus),
+        Selected(R.drawable.quantity),
+        Disable(R.drawable.plusgray);
     }
 
     companion object {

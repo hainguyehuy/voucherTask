@@ -80,7 +80,7 @@ class VoucherViewModel : ViewModel() {
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {
         viewModelScope.launch {
-            _voucher.postValue(dataItem)
+            _voucher.postValue(dataItem1)
         }
     }
     fun onClick(itemVoucherState: ItemVoucherState) {

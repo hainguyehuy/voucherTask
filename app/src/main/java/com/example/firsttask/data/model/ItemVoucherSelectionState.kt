@@ -12,7 +12,7 @@ class ItemVoucherSelectionState(
 
 ) : Serializable {
 
-    fun total(): Double {
+    private fun total(): Double {
         var totalVouchersAmount = 0.0
         data.forEach {
             if (it.status == ItemVoucherState.Status.Selected) {

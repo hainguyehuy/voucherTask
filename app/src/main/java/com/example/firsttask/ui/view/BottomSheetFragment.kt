@@ -41,10 +41,10 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
             showsCustomDialogBox(message)
         }
 
-        viewModel.voucher.observe(this){
-            itemVoucherAdapter.updateItemData(it.data)
-        }
         viewModel.voucher.observe(this) {
+            itemVoucherAdapter.updateItemData(it.data)
+
+
             _binding!!.tvAmount.text =
                 StringBuilder().append("SGD ${it.paymentAmount}")
             _binding!!.tvSGD.text =
