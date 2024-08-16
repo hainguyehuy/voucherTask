@@ -8,15 +8,15 @@ class ItemVoucherState(
 //    val image : Uri,
     val provider: String,
     val name: String,
-    val status : Status = Status.Default,
+    var status : Status = Status.Default,
 //    val type : Boolean,
 //    val rawData: Item
 
 ) {
-    enum class Status(plus: Int) {
-        Default(R.drawable.plus),
-        Selected(R.drawable.quantity),
-        Disable(R.drawable.plusgray);
+    enum class Status() {
+        Default(),
+        Selected(),
+        Disable();
     }
 
     companion object {

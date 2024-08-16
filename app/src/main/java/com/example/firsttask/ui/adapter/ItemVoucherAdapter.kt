@@ -9,11 +9,12 @@ import com.example.firsttask.R
 import com.example.firsttask.data.model.ItemVoucherState
 import com.example.firsttask.databinding.ItemLayoutBinding
 
-class ItemVoucherAdapter(private val onClickItem : (ItemVoucherState) -> Unit) :
+class ItemVoucherAdapter(private val onClickItem: (ItemVoucherState) -> Unit) :
     RecyclerView.Adapter<ItemVoucherAdapter.ItemVoucherAdapterViewHolder>() {
 
 
     private val list = ArrayList<ItemVoucherState>()
+
     @SuppressLint("NotifyDataSetChanged")
     fun updateItemData(items: List<ItemVoucherState>) {
         list.clear()
@@ -21,7 +22,7 @@ class ItemVoucherAdapter(private val onClickItem : (ItemVoucherState) -> Unit) :
         notifyDataSetChanged()
     }
 
-//    var event: ButtonClickEvent? = null
+    //    var event: ButtonClickEvent? = null
     var count = 0
     var sum = 0.0
     var minus = 0.0
@@ -52,27 +53,28 @@ class ItemVoucherAdapter(private val onClickItem : (ItemVoucherState) -> Unit) :
             binding.tvProvider.text = item.provider
 
             binding.root.setOnClickListener {
-                onClickItem(list[adapterPosition])
+                onClickItem(item)
             }
-            // bỏ comment từng dòng bên dưới, rồi chạy lại để xem kết quả
 
-            when(item.status){
+            when (item.status) {
                 ItemVoucherState.Status.Disable -> {
                     binding.ivPlus.isActivated = false
                     binding.ivPlus.isEnabled = false
                 }
+
                 ItemVoucherState.Status.Default -> {
                     binding.ivPlus.isActivated = false
                     binding.ivPlus.isEnabled = true
                 }
+
                 ItemVoucherState.Status.Selected -> {
                     binding.ivPlus.isActivated = true
                     binding.ivPlus.isEnabled = true
                 }
             }
-            binding.ivPlus.setOnClickListener {
-
-            }
+//            binding.ivPlus.setOnClickListener {
+//                onClickItem(item)
+//            }
 
         }
     }

@@ -2,6 +2,7 @@ package com.example.firsttask.ui.viewmodel
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,9 +12,11 @@ import com.example.firsttask.data.model.ItemVoucherSelectionState
 import com.example.firsttask.data.model.ItemVoucherState
 import com.example.firsttask.data.repository.RetrofitRepository
 import kotlinx.coroutines.launch
+import okhttp3.internal.applyConnectionSpec
+import kotlin.coroutines.coroutineContext
 
 class VoucherViewModel : ViewModel() {
-//    private val retrofitRepository = RetrofitRepository()
+    //    private val retrofitRepository = RetrofitRepository()
     val dataItem = ItemVoucherSelectionState(
         isLoading = false,
         paymentAmount = 0.0,
@@ -25,7 +28,7 @@ class VoucherViewModel : ViewModel() {
                 id = "0",
                 name = "\$10 Min of spend \$80 second line",
                 provider = "Plaza Prenium",
-                status = ItemVoucherState.Status.Selected,
+                status = ItemVoucherState.Status.Default,
                 amount = 10.0
             ),
             ItemVoucherState(
@@ -75,16 +78,34 @@ class VoucherViewModel : ViewModel() {
         )
     )
     private val _voucher: MutableLiveData<ItemVoucherSelectionState> = MutableLiveData(dataItem)
-    var voucher : LiveData<ItemVoucherSelectionState> = _voucher
+    var voucher: LiveData<ItemVoucherSelectionState> = _voucher
 
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {
         viewModelScope.launch {
-            _voucher.postValue(dataItem1)
+            _voucher.postValue(dataItem)
         }
     }
-    fun onClick(itemVoucherState: ItemVoucherState) {
 
+    fun onClickItem(itemVoucherState: ItemVoucherState) {
+        var totalAmount = 0.0
+        dataItem.data.forEach {
+            if (itemVoucherState.status == ItemVoucherState.Status.Default) {
+                itemVoucherState.status = ItemVoucherState.Status.Selected
+            }
+        }
+
+
+
+        Log.d("data", totalAmount.toString())
+
+//        if (itemVoucherState.status != ItemVoucherState.Status.Default){
+//            var totalAmount = 0.0
+//            dataItem1.data.forEach {
+//                totalAmount =+ it.amount
+//            }
+//            Log.d("data",dataItem.data[1].name)
+//        }
     }
 
 }

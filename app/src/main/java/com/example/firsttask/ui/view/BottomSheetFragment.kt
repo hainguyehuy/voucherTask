@@ -21,20 +21,22 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class BottomSheetFragment : BottomSheetDialogFragment(){
     private var _binding: FragmentBottomSheetBinding? = null
     private val binding get() = _binding!!
-    private val itemVoucherAdapter = ItemVoucherAdapter(::onClickItem)
+    private lateinit var itemVoucherAdapter : ItemVoucherAdapter
     private val viewModel: VoucherViewModel by viewModels()
 
 
-    private fun onClickItem(itemVoucherState: ItemVoucherState) {
-        viewModel.onClick(itemVoucherState)
-    }
+//    private fun onClickItem(itemVoucherState: ItemVoucherState) {
+//        viewModel.onClick(itemVoucherState)
+//        viewModel.voucher.observe(this){
+//
+//        }
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
         _binding!!.rvVoucher.layoutManager = LinearLayoutManager(context)
-        _binding!!.rvVoucher.adapter = itemVoucherAdapter
 
         _binding!!.rightIcon.setOnClickListener {
             val message = "Do you want to apply your selected vouchers"
@@ -42,6 +44,10 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
         }
 
         viewModel.voucher.observe(this) {
+            itemVoucherAdapter = ItemVoucherAdapter(){
+                itemVoucherState -> viewModel.onClickItem(itemVoucherState)
+            }
+            _binding!!.rvVoucher.adapter = itemVoucherAdapter
             itemVoucherAdapter.updateItemData(it.data)
 
 
