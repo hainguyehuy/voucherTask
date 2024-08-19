@@ -93,7 +93,6 @@ class VoucherViewModel : ViewModel() {
 
         dataItem.data.forEach {
             if (it.id == itemVoucherState.id) {
-                if (it.status == ItemVoucherState.Status.Default) {
                     val newDataTest = it.copy(status = ItemVoucherState.Status.Selected)
                     val newData = listOf(
                         newDataTest, ItemVoucherState(
@@ -113,8 +112,6 @@ class VoucherViewModel : ViewModel() {
                     )
                     val rvData = dataItem.copy(data = newData)
                     _voucher.postValue(rvData)
-                }
-
             }
         }
 //        val data = itemVoucherState.copy(status = ItemVoucherState.Status.Selected)
