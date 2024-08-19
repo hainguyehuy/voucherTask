@@ -22,7 +22,6 @@ class VoucherViewModel : ViewModel() {
         paymentAmount = 0.0,
         displayItem = 3,
         totalCount = 3,
-        selectCount = 2,
         data = listOf(
             ItemVoucherState(
                 id = "0",
@@ -35,7 +34,7 @@ class VoucherViewModel : ViewModel() {
                 id = "1",
                 name = "\$10 Min of spend \$80 second line",
                 provider = "Plaza Prenium",
-                status = ItemVoucherState.Status.Selected,
+                status = ItemVoucherState.Status.Default,
                 amount = 10.0
             ),
             ItemVoucherState(
@@ -52,7 +51,6 @@ class VoucherViewModel : ViewModel() {
         paymentAmount = 0.0,
         displayItem = 3,
         totalCount = 3,
-        selectCount = 3,
         data = listOf(
             ItemVoucherState(
                 id = "0",
@@ -88,24 +86,49 @@ class VoucherViewModel : ViewModel() {
     }
 
     fun onClickItem(itemVoucherState: ItemVoucherState) {
-        var totalAmount = 0.0
+        // duyệt qua các phần tử trong data, nếu item.id = itemVoucherState.id
+        // cập nhật trạng thái của item đó
+        // thay thế phần tử có id trùng với id(click) vào trong ItemVoucherSelectionState.data
+        // cập nhật lại MutableLiveData<ItemVoucherSelectionState>
+
         dataItem.data.forEach {
-            if (itemVoucherState.status == ItemVoucherState.Status.Default) {
-                itemVoucherState.status = ItemVoucherState.Status.Selected
+            if (it.id == itemVoucherState.id) {
+                val newDataTest = ItemVoucherState(
+                    id = "0",
+                    name = "\$10 Min of spend \$80 second line",
+                    provider = "Plaza Prenium",
+                    status = ItemVoucherState.Status.Selected,
+                    amount = 10.0
+                ).copy(status = ItemVoucherState.Status.Selected)
+                val newData = listOf(newDataTest)
+                val newDataa = dataItem.copy(data = newData)
+                _voucher.postValue(newDataa)
             }
         }
+//        val data = itemVoucherState.copy(status = ItemVoucherState.Status.Selected)
+        //Log.d("a", _voucher.)
+        //th1
+        //itemVoucherState.status == ItemVoucherState.Status.Default
+        // default -> selected
+        // selectCount = ItemVoucherState.Status.Selected
+        // displayItem = dataItem.data.size
+        // totalVoucherAmount += itemVoucherState.amount
+
+        //th2
+        //itemVoucherState.status == ItemVoucherState.Status.Selected
+        // selected -> default
+        // selectCount = ItemVoucherState.Status.Selected
+        // displayItem = dataItem.data.size
+        // totalVoucherAmount -= itemVoucherState.amount
+
+        // th3 (chỉ đc chọn 1 voucher )
+        // itemVoucherState.status == ItemVoucherState.Status.Disable
+        // selectCount = 1
+        // totalVoucherAmount = itemVoucherState.amount
 
 
-
-        Log.d("data", totalAmount.toString())
-
-//        if (itemVoucherState.status != ItemVoucherState.Status.Default){
-//            var totalAmount = 0.0
-//            dataItem1.data.forEach {
-//                totalAmount =+ it.amount
-//            }
-//            Log.d("data",dataItem.data[1].name)
-//        }
+        //
     }
 
 }
+

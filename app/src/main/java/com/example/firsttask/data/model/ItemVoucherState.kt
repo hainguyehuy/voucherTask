@@ -2,7 +2,7 @@ package com.example.firsttask.data.model
 
 import com.example.firsttask.R
 
-class ItemVoucherState(
+data class ItemVoucherState(
     val id: String,
     val amount: Double,
 //    val image : Uri,
