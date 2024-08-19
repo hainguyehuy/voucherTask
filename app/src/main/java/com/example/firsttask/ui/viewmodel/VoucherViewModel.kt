@@ -93,16 +93,35 @@ class VoucherViewModel : ViewModel() {
 
         dataItem.data.forEach {
             if (it.id == itemVoucherState.id) {
-                val newDataTest = ItemVoucherState(
-                    id = "0",
-                    name = "\$10 Min of spend \$80 second line",
-                    provider = "Plaza Prenium",
-                    status = ItemVoucherState.Status.Selected,
-                    amount = 10.0
-                ).copy(status = ItemVoucherState.Status.Selected)
-                val newData = listOf(newDataTest)
-                val newDataa = dataItem.copy(data = newData)
-                _voucher.postValue(newDataa)
+                if (it.status == ItemVoucherState.Status.Default) {
+
+                    val newDataTest = ItemVoucherState(
+                        id = "0",
+                        name = "\$10 Min of spend \$80 second line",
+                        provider = "Plaza Prenium",
+                        status = ItemVoucherState.Status.Default,
+                        amount = 10.0
+                    ).copy(status = ItemVoucherState.Status.Selected)
+                    val newData = listOf(
+                        newDataTest, ItemVoucherState(
+                            id = "1",
+                            name = "\$10 Min of spend \$80 second line",
+                            provider = "Plaza Prenium",
+                            status = ItemVoucherState.Status.Default,
+                            amount = 10.0
+                        ),
+                        ItemVoucherState(
+                            id = "2",
+                            name = "\$10 Min of spend \$80 second line",
+                            provider = "Plaza Prenium",
+                            status = ItemVoucherState.Status.Default,
+                            amount = 5.0
+                        )
+                    )
+                    val rvData = dataItem.copy(data = newData)
+                    _voucher.postValue(rvData)
+                }
+
             }
         }
 //        val data = itemVoucherState.copy(status = ItemVoucherState.Status.Selected)
