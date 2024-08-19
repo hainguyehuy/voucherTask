@@ -1,23 +1,17 @@
 package com.example.firsttask.ui.viewmodel
 
 import android.annotation.SuppressLint
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.viewModelScope
 import com.example.firsttask.data.model.ItemVoucherSelectionState
 import com.example.firsttask.data.model.ItemVoucherState
-import com.example.firsttask.data.repository.RetrofitRepository
 import kotlinx.coroutines.launch
-import okhttp3.internal.applyConnectionSpec
-import kotlin.coroutines.coroutineContext
 
 class VoucherViewModel : ViewModel() {
     //    private val retrofitRepository = RetrofitRepository()
-    val dataItem = ItemVoucherSelectionState(
+    private val dataItem = ItemVoucherSelectionState(
         isLoading = false,
         paymentAmount = 0.0,
         displayItem = 3,
@@ -46,7 +40,7 @@ class VoucherViewModel : ViewModel() {
             )
         )
     )
-    val dataItem1 = ItemVoucherSelectionState(
+    private val dataItem1 = ItemVoucherSelectionState(
         isLoading = false,
         paymentAmount = 0.0,
         displayItem = 3,
@@ -81,7 +75,7 @@ class VoucherViewModel : ViewModel() {
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {
         viewModelScope.launch {
-            _voucher.postValue(dataItem1)
+            _voucher.postValue(dataItem)
         }
     }
 
@@ -91,29 +85,34 @@ class VoucherViewModel : ViewModel() {
         // thay thế phần tử có id trùng với id(click) vào trong ItemVoucherSelectionState.data
         // cập nhật lại MutableLiveData<ItemVoucherSelectionState>
 
-        dataItem.data.forEach {
-            if (it.id == itemVoucherState.id) {
-                    val newDataTest = it.copy(status = ItemVoucherState.Status.Selected)
-                    val newData = listOf(
-                        newDataTest, ItemVoucherState(
-                            id = "1",
-                            name = "\$10 Min of spend \$80 second line",
-                            provider = "Plaza Prenium",
-                            status = ItemVoucherState.Status.Selected,
-                            amount = 10.0
-                        ),
-                        ItemVoucherState(
-                            id = "2",
-                            name = "\$10 Min of spend \$80 second line",
-                            provider = "Plaza Prenium",
-                            status = ItemVoucherState.Status.Default,
-                            amount = 5.0
-                        )
-                    )
-                    val rvData = dataItem.copy(data = newData)
-                    _voucher.postValue(rvData)
+        val itemVoucherStateNew = dataItem.data.map {
+            if (it.id == itemVoucherState.id && it.status == ItemVoucherState.Status.Default) {
+                val newDataTest = it.copy(status = ItemVoucherState.Status.Selected)
+                newDataTest
+            } else {
+                it
             }
         }
+
+        val rvData = dataItem.copy(data = itemVoucherStateNew)
+        _voucher.postValue(rvData)
+
+
+//        dataItem.data.forEach {
+//            if (it.id == itemVoucherState.id) {
+//                val newDataTest = it.copy(status = ItemVoucherState.Status.Selected)
+//                val newData = listOf(
+//                    newDataTest
+//                )
+//                val rvData = dataItem.copy(data = newData)
+//                _voucher.postValue(rvData)
+//            }
+//            else{
+//
+//            }
+//        }
+
+
 //        val data = itemVoucherState.copy(status = ItemVoucherState.Status.Selected)
         //Log.d("a", _voucher.)
         //th1
