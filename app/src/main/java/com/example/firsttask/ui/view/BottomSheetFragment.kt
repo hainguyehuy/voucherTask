@@ -50,16 +50,17 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
             _binding!!.rvVoucher.adapter = itemVoucherAdapter
             itemVoucherAdapter.updateItemData(it.data)
 
-
             _binding!!.tvAmount.text =
                 StringBuilder().append("SGD ${it.paymentAmount}")
             _binding!!.tvSGD.text =
                 StringBuilder().append("SGD ${it.totalVouchersAmount}")
             _binding!!.tvDisplayVouchers.text =
-                StringBuilder().append("Display ${it.displayItem} of ${it.totalCount} vouchers")
+                StringBuilder().append("Display ${it.displayItemUI} of ${it.displayItemUI} vouchers")
             _binding!!.tvSelectedAllVoucher.text = it.selectedOrUnselectedItem
             _binding!!.tvSelected.text =
                 StringBuilder().append("Selected Voucher (${it.selectedVoucher})")
+
+
             _binding!!.tvSelectedAllVoucher.setOnClickListener {
                 viewModel.onClickAllItem()
             }

@@ -22,7 +22,7 @@ data class ItemVoucherSelectionState(
     }
     val totalVouchersAmount : Double get() = total()
 
-
+    val displayItemUI : Int get() = data.size
 
     val selectedVoucher
         get() = data.count {
