@@ -5,17 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.firsttask.data.model.ItemVoucherSelectionState
+import com.example.firsttask.data.model.VoucherSelectionState
 import com.example.firsttask.data.model.ItemVoucherState
 import com.example.firsttask.data.repository.RetrofitRepository
 import kotlinx.coroutines.launch
 
 class VoucherViewModel : ViewModel() {
     private val retrofitRepository = RetrofitRepository()
-    private val itemVoucherSelectionState = ItemVoucherSelectionState()
+    private val itemVoucherSelectionState = VoucherSelectionState()
 
-    private val _voucher = MutableLiveData<ItemVoucherSelectionState>()
-    var voucher: LiveData<ItemVoucherSelectionState> = _voucher
+    private val _voucher = MutableLiveData<VoucherSelectionState>()
+    var voucher: LiveData<VoucherSelectionState> = _voucher
 
     @SuppressLint("SuspiciousIndentation")
     fun fetchVoucher() {

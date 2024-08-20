@@ -2,7 +2,7 @@ package com.example.firsttask.data.model
 
 import java.io.Serializable
 
-data class ItemVoucherSelectionState(
+data class VoucherSelectionState(
     var isLoading: Boolean = false,
     var paymentAmount: Double = 0.0,
     var displayItem: Int = 0,
