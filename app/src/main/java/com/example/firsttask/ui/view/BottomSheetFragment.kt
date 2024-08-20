@@ -11,8 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firsttask.R
-import com.example.firsttask.data.model.ItemVoucherSelectionState
-import com.example.firsttask.data.model.ItemVoucherState
 import com.example.firsttask.databinding.FragmentBottomSheetBinding
 import com.example.firsttask.ui.adapter.ItemVoucherAdapter
 import com.example.firsttask.ui.viewmodel.VoucherViewModel
@@ -24,13 +22,6 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
     private lateinit var itemVoucherAdapter : ItemVoucherAdapter
     private val viewModel: VoucherViewModel by viewModels()
 
-
-//    private fun onClickItem(itemVoucherState: ItemVoucherState) {
-//        viewModel.onClick(itemVoucherState)
-//        viewModel.voucher.observe(this){
-//
-//        }
-//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +31,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
 
         _binding!!.rightIcon.setOnClickListener {
             val message = "Do you want to apply your selected vouchers"
-            showsCustomDialogBox(message)
+            showDialog(message)
         }
 
         viewModel.voucher.observe(this) {
@@ -69,7 +60,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
         return binding.root
 
     }
-    private fun showsCustomDialogBox(message: String?) {
+    private fun showDialog(message: String?) {
         val dialog = context?.let { Dialog(it) }
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.setCancelable(false)

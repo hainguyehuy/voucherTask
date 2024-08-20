@@ -1,11 +1,10 @@
 package com.example.firsttask.data.model
 
-import com.example.firsttask.R
+
 
 data class ItemVoucherState(
     var id: String,
     val amount: Double,
-//    val image : Uri,
     val provider: String,
     val name: String,
     var status : Status = Status.Default,

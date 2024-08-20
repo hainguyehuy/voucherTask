@@ -47,10 +47,10 @@ class VoucherViewModel : ViewModel() {
 
     fun onClickAllItem() {
 
-        val a = _voucher.value!!.selectedVoucher == _voucher.value!!.data.size
+        val isSelectedAll = _voucher.value!!.selectedVoucher == _voucher.value!!.data.size
         val itemVoucherStateNew = _voucher.value!!.data.map {
             val nState =
-                if (a) ItemVoucherState.Status.Default
+                if (isSelectedAll) ItemVoucherState.Status.Default
                 else ItemVoucherState.Status.Selected
             val newDataTest = it.copy(status = nState)
             newDataTest

@@ -1,11 +1,9 @@
 package com.example.firsttask.ui.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.firsttask.R
 import com.example.firsttask.data.model.ItemVoucherState
 import com.example.firsttask.databinding.ItemLayoutBinding
 
@@ -22,11 +20,7 @@ class ItemVoucherAdapter(private val onClickItem: (ItemVoucherState) -> Unit) :
         notifyDataSetChanged()
     }
 
-    //    var event: ButtonClickEvent? = null
-    var count = 0
-    var sum = 0.0
-    var minus = 0.0
-    var minusSelected = 0
+
 
     override fun onBindViewHolder(holder: ItemVoucherAdapterViewHolder, position: Int) {
         holder.bind(list[position])
@@ -72,9 +66,7 @@ class ItemVoucherAdapter(private val onClickItem: (ItemVoucherState) -> Unit) :
                     binding.ivPlus.isEnabled = true
                 }
             }
-//            binding.ivPlus.setOnClickListener {
-//                onClickItem(item)
-//            }
+
 
         }
     }

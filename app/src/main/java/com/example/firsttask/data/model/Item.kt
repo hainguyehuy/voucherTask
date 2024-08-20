@@ -9,7 +9,3 @@ data class Item(
     val provider: String,
     val type: Int
 )
-// tao class chua data of itemView
- // tao bien checked
-// map sang itemView
-// click + -> value of checked -> goi rv update ui

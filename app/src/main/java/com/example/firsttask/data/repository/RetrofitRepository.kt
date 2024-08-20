@@ -5,6 +5,6 @@ import com.example.firsttask.data.model.Item
 
 class RetrofitRepository {
     suspend fun getVouchers() : List<Item>{
-        return RetrofitClient.apiService.getData().result?.items?: listOf()
+        return RetrofitClient.apiService.getData().result.items?: listOf()
     }
 }
