@@ -9,7 +9,7 @@ data class ItemVoucherState(
     val provider: String,
     val name: String,
     var status : Status = Status.Default,
-//    val type : Boolean,
+    val type : Int,
 //    val rawData: Item
 
 ) {
@@ -25,6 +25,7 @@ data class ItemVoucherState(
             amount = rawData.amount.toDouble(),
             name = rawData.name,
             provider = rawData.provider,
+            type = rawData.type
 //            rawData = rawData
         )
     }

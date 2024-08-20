@@ -60,6 +60,9 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
             _binding!!.tvSelectedAllVoucher.text = it.selectedOrUnselectedItem
             _binding!!.tvSelected.text =
                 StringBuilder().append("Selected Voucher (${it.selectedVoucher})")
+            _binding!!.tvSelectedAllVoucher.setOnClickListener {
+                viewModel.onClickAllItem()
+            }
         }
         viewModel.fetchVoucher()
         return binding.root
