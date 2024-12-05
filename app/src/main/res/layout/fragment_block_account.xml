@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.blockAccount.BlockAccountFragment"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/lp_img_block_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/icon_upgradewallet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/image_block_account"/>
+
+    <TextView
+        android:id="@+id/lp_text_block_account_title"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:text="@string/are_you_sure_you_want_to_block_your_account"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lp_img_block_account" />
+    <TextView
+        android:id="@+id/lp_text_block_account_body"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lp_text_block_account_title"
+        android:text="@string/once_blocked_you_will_be_unable_to_log_in_all_outgoing_transactions_will_be_disabled_and_reactivating_your_account_will_require_contacting_our_support_team_n_nto_proceed_please_confirm_your_action_using_your_pin"
+        android:textSize="16sp"/>
+    <LinearLayout
+        android:id="@+id/lp_button_proceed"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lp_text_block_account_body"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/lp_btn_proceed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/proceed"
+            android:textSize="16sp"
+            android:textColor="#FCFCFC"
+            />
+        <TextView
+            android:id="@+id/lp_title_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="No, I do not wish to block account"
+            android:textColor="#7A35B0"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

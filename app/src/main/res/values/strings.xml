@@ -10,4 +10,19 @@
     <string name="sgd_0_00">SGD 0.00</string>
     <string name="newpayable">-</string>
     <string name="conti">Continue</string>
+    <string name="are_you_sure_you_want_to_block_your_account">Are you sure you want to block your account?</string>
+    <string name="proceed">Proceed</string>
+    <string name="once_blocked_you_will_be_unable_to_log_in_all_outgoing_transactions_will_be_disabled_and_reactivating_your_account_will_require_contacting_our_support_team_n_nto_proceed_please_confirm_your_action_using_your_pin">Once blocked, you will be unable to log in, all outgoing transactions will be disabled, and reactivating your account will require contacting our support team. \n \nTo proceed, please confirm your action using your PIN.</string>
+    <string name="block_account">Block Account</string>
+    <string name="cancel">Cancel</string>
+    <string name="before_we_continue_to_block_you_account">Before we continue to block you account…</string>
+    <string name="your_account_has_been_blocked_successfully">Your account has been blocked successfully</string>
+    <string name="you_can_no_longer_log_in_or_perform_transactions_n_n_to_reactivate_your_account_please_contact_out_support_team_at_support_liquidpay_com_n_n_thank_yoi_for_ensuring_the_security_of_your_account_a_bit_funny">
+        You can no longer log in or perform transactions \n\n
+        To reactivate your account, please contact out support eam at <font color ="#7A35B0">support@liquidpay.com</font> \n\n
+        <i><font >Thank you for ensuring the security of your account??? a bit funny</font></i>
+
+    </string>
+    <string name="okay">Okay</string>
+    <string name="image_block_account">Image Block Account</string>
 </resources>
